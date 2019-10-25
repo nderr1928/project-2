@@ -8,7 +8,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
 
+app.get('/', (req, res) => {
+    res.render('index.ejs');
+})
 
+app.get('/registration', (req, res) => {
+    res.render('newUser.ejs');
+})
 
 
 
