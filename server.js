@@ -9,6 +9,11 @@ require('./db/db.js');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
+const usersController = require('./controllers/user.js');
+app.use('/users', usersController);
+
+const eventsController = require('./controllers/events.js');
+app.use('/events', eventsController);
 
 app.get('/', (req, res) => {
     res.render('index.ejs');
@@ -17,7 +22,6 @@ app.get('/', (req, res) => {
 app.get('/registration', (req, res) => {
     res.render('newUser.ejs');
 })
-
 
 
 
