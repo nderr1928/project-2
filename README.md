@@ -72,3 +72,12 @@ Events [Index]
 (Filter)
 
 Search Bar- Stretch
+
+#George's Notes: 
+
+User goes to website and is prompted to create an account and provide basic information - email, username, city.  Then, on the home page there are three primary sections.  They can see organizer’s events that are located within their city as Events Near You.  Additionally, they can search organizer’s to find their particular politicians that they are interested in following.  There will be a section where they can see their follower’s upcoming events that they are tracking.
+They can navigate to a show page of a particular event.
+
+Organizer story
+Organizer goes to website and is prompted to create an account and provide basic information - email username, city.  Then, they have the ability to go to their home page where they can see three primary sections.  They can see their own events that they have organized.  They can see those that are following them.  They can search other organizers and see their events.
+When they choose to create a new event, they are taken to a page where they can set up the location, name of event, city, and description.  They can navigate to view an event whether or not it’s theirs.
