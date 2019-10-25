@@ -1,0 +1,21 @@
+/* Event lists styles */
+.eventList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    overflow: scroll;
+}
+
+/* Event box styles */
+.eventPreview{
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        "image eventTitle"
+        "image eventOrganizer"
+        "image eventDetails"
+        "image eventDescription";
+    grid-template-columns: 2;
+    grid-template-rows: 4;
+}
