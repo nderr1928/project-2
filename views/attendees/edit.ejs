@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit User</title>
+</head>
+<body>
+	<h1>Make changes to your profile below</h1>
+	<form action="/:id/<%=user._id%>?_method=PUT" method="post">
+		<input type="text" name="name" value="user.name"><br/>
+		<input type="text" name="displayName" value="user.displayName"><br/>
+		<input type="text" name="profilePic" value="user.profilePic"><br/>
+		<input type="text" name="location" value="user.location"><br/>
+		<input type="email" name="email" value="user.email"><br/>
+		<input type="password" name="password" value="user.password"><br/>
+		<button type="submit">Register User</button>
+	</form>
+</body>
+</html>
