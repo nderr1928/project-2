@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
 	location: {type: String, required: true},
 	email: {type: String, required: true},
 	password: {type: String, required: true},
-	isOrganizer: {type: Boolean, required: true},
+	isOrganizer: Boolean,
 	events: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Event'
