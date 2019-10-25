@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="/users">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users">Profile</a>
+            <!-- Add user session id into profile href -->
+    </nav>
+    <h1>Look at events</h1>
+    <div>Filter fuctions</div>
+    <div class="eventList">
+        <!-- List of events -->
+        <% for(let i = 0; i<events.length; i++){ %>
+            <div class="eventPreview">
+                events[i].title;
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
