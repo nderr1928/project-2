@@ -75,6 +75,7 @@ Search Bar- Stretch
 
 #George's Notes: 
 
+User Story
 User goes to website and is prompted to create an account and provide basic information - email, username, city.  Then, on the home page there are three primary sections.  They can see organizer’s events that are located within their city as Events Near You.  Additionally, they can search organizer’s to find their particular politicians that they are interested in following.  There will be a section where they can see their follower’s upcoming events that they are tracking.
 They can navigate to a show page of a particular event.
 
