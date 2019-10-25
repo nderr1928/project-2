@@ -8,7 +8,11 @@ const userSchema = mongoose.Schema({
 	email: {type: String, required: true},
 	password: {type: String, required: true},
 	isOrganizer: {type: Boolean, required: true},
-	events: [{
+	createdEvents: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Event'
+	}],
+	attendingEvents: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Event'
 	}]
