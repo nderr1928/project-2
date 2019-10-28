@@ -3,10 +3,15 @@ const app = express();
 const PORT = 3000;
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const User = require('./models/users.js');
-const bcrypt = require('bcrypt.js');
+const session = require('express-session');
 
 require('./db/db.js');
+
+app.use(session({
+    secret: "secret tunnel",
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
@@ -18,40 +23,16 @@ app.use('/users', usersController);
 const eventsController = require('./controllers/events.js');
 app.use('/events', eventsController);
 
+const loginController = require('./controllers/login.js');
+app.use('/auth', loginController);
+
 app.get('/', async (req, res) => {
-    res.render('index.ejs');
-})
-
-app.get('/registration', async (req, res) => {
-    res.render('newUser.ejs');
-})
-
-app.post('/registration', async (req, res) => {
-    try{
-        const newUser = {};
-        newUser.name =  req.body.name
-        newUser.displayName = req.body.displayName
-        newUser.profilePic = req.body.profilePic
-        newUser.location = req.body.location
-        newUser.email = req.body.email
-        const password = req.body.password
-        const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-        newUser.password = passwordHash;
-        if(req.body.isOrganizer === "on"){
-            newUser.isOrganizer = true;
-        } else{
-            newUser.isOrganizer = false;
-        }
-        // added the user to the db
-        const createdUser = await User.create(newUser);
-        console.log(createdUser);
-        res.redirect(`/users/${createdUser._id}`);
-    } catch(err){
-        res.send(err);
-    }
+    console.log("home index route");
+    res.render('index.ejs', {
+        message: req.session.message,
+        logOut: req.session.logOutMsg
+    });
 });
-
-
 
 app.listen(PORT, () => {
     console.log('Server is up on port:', PORT);
