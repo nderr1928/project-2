@@ -10,14 +10,16 @@
 <body class="homepage">
     <h1>Grassroot Connections</h1>
     
+    <%= logOut %>
+    <%= message %>
     <div class="loginBox">
-        <form action="users/index" method="get" class="login">
+        <form action="/auth/login" method="post" class="login">
             Email <input name="email" type="email" placeholder="email"><br/>
             Password <input name="password" type="password" placeholder="password"><br/>
             <button type='submit'>Login</button><br/>
         </form>
     </div>
-    <form action="/registration" method="get" class="registration">
+    <form action="/auth/registration" method="get" class="registration">
         <h5>Don't have an account? Click below to register!</h5>
         <button type='Submit'>Create an account</button>
     </form>
