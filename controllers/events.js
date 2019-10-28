@@ -7,7 +7,8 @@ const Event = require('../models/events.js');
 router.get('/', (req, res) => {
   Event.find({}, (err, allEvents) => {
     res.render('events/index.ejs', {
-      events: allEvents
+      events: allEvents,
+      userId: req.session.userId
     });
 
   });
@@ -23,7 +24,8 @@ router.get('/:id/edit', async (req, res) => {
     try{
         const selectedEvent = await Event.findById(req.params.id);
         res.render('events/edit.ejs', {
-            event: selectedEvent
+            event: selectedEvent,
+            userId: req.session.userId
         })
     } catch(err) {
         res.send(err);
@@ -53,7 +55,8 @@ router.get('/:id', async (req, res) => {
     // .exec()
     // render event show page
     res.render('events/show.ejs', {
-      event: foundEvent
+      event: foundEvent,
+      userId: req.session.userId
     })
   } catch(err){
       res.send(err);

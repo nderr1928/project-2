@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/users.js');
 const bcrypt = require('bcryptjs');
+const session = require('express-session');
 
 
 router.post('/login', async (req, res) => {
@@ -16,10 +17,10 @@ router.post('/login', async (req, res) => {
                 req.session.message = '';
                 // if there failed attempts get rid of the message
                 // from the session
-                req.session.id = foundUser._id;
+                req.session.userId = foundUser._id;
                 req.session.logged = true;
-                
-                console.log("Successful login: ", req.session.id);
+
+                console.log("Successful login: ", req.session.userId);
                 res.redirect(`/users/${foundUser._id}`)
   
             } else {
@@ -62,9 +63,9 @@ router.post('/registration', async (req, res) => {
         // added the user to the db
         const createdUser = await User.create(newUser);
         console.log(createdUser);
-        req.session.id = createdUser._id;
+        req.session.userId = createdUser._id;
         req.session.logged = true;
-        console.log("New user created: ",req.session.id);
+        console.log("New user created: ",req.session.userId);
         res.redirect(`/users/${createdUser._id}`)
     } catch(err){
         res.send(err);

@@ -3,6 +3,7 @@ const router = express.Router();
 const Event = require('../models/events.js');
 const User = require('../models/users.js');
 
+
 //Index Route
 
 router.get('/:id', async (req, res) =>{
@@ -12,15 +13,17 @@ router.get('/:id', async (req, res) =>{
 		if(foundUser.isOrganizer === true){
 		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
 		//user object and the organizers index.ejs is rendered. 
-
+			console.log(req.session)
 			res.render('organizers/index.ejs', {
-				user: foundUser
+				user: foundUser,
+				userId: req.session.userId
 			});
 		} else {
 		//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
 		//user object and the attendees index.ejs is rendered. 	
 			res.render('attendees/index.ejs', {
-				user: foundUser
+				user: foundUser,
+				userId: req.session.userId
 			})
 		}
 	} catch(err){
@@ -36,13 +39,15 @@ router.get('/:id/show', async (req, res) =>{
 		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
 		//user object and the organizers show.ejs is rendered. 
 			res.render('organizers/show.ejs', {
-				user: foundUser
+				user: foundUser,
+				userId: req.session.userId
 			});
 		} else {
 		//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
 		//user object and the attendees show.ejs is rendered. 	
 			res.render('attendees/show.ejs', {
-				user: foundUser
+				user: foundUser,
+				userId: req.session.userId
 			})
 		}		
 
@@ -64,13 +69,15 @@ router.get('/:id/edit', async (req, res) =>{
 		if(foundUser.isOrganizer === true){
 			//if the user is an organizer, the organizer edit page will be rendered
 			res.render('organizers/edit.ejs', {
-				user: foundUser
+				user: foundUser,
+				userId: req.session.userId
 				//foundUser will be defined as user in edit.ejs
 			});
 		} else {
 			//if the user is not registered as an organizer, the attendee edit page will be rendered
 			res.render('attendees/edit.ejs', {
-				user: foundUser
+				user: foundUser,
+				userId: req.session.userId
 				//foundUser will be defined as user in edit.ejs
 			});
 		}
