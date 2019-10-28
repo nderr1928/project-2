@@ -33,6 +33,7 @@ router.get('/:id/edit', async (req, res) => {
 // edit part 2 to get back to show
 router.put('/:id', async (req, res) => {
     try{
+      console.log(req.params);
         const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {new: true})
         res.redirect(`/${req.params.id}`, {
             event: updatedEvent

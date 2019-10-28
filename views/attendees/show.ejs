@@ -1,54 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Attendess for the Event</title>
+    <title>Attendee's Profile</title>
 </head>
-  <body>
-    <header>
-      <h1>Attendees for <%=event.name%></h1>
-      <nav> <!-- May  not be needed considering we are doing a NAV bar but figured to have it till then -->
-        <ul>
-          <li>
-            <a href="/">Home</a> 
-          </li>
-          <li>
-            <a href="/events">Events Index</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section>
-        <h2>Event Details:</h2>   
-        <ul>
-          <li>Event: <%=event.name%></li>
-          <li>Event: <%=event.location%></li>
-          <li>Event: <%=event.date%></li>
-          <li>Event: <%=event.time%></li>
-          <li>Event: <%=event.eventPic%></li>
-          <li>Event: <%=event.description%></li>
-        </ul>
-      </section>
-      <section>
-          <h2>Attendees for <%=event.name%>:</h2> <!-- how do we get the user ID from when someone clicks attending -->
-          <ul>
-              <% for(let i = 0; i < event.users.length; i++){ %>
-                  <li><%=event.attendees[i]%></a></li>
-              <% } %>
-          </ul>
-      </section>
-      <section>
-        <form action="/event" method="POST">
-          <button type='Submit'>Attend!</button>
-        </form>
-        <form action="/event/<%=event.users._id%>?_method=DELETE" method="POST">  <!-- Delete user from event  -->
-          <button type='submit'>Backout</button>
-        </form>
-      </section>
-    </main>
-  </body>
-</html>
+<body>
+    <nav>
+        <a href="/users">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users">Profile</a>
+            <!-- Add user session id into profile href -->
+    </nav>
+    <div class='userHead'>
+        <h1>Meet <%=user.displayName%></h1>
+        <img class='profilePic' src="<%=user.profilePic%>">
+        Name: <%=user.name%>
+        Location: <%=user.location%>
+        Email: <%=user.location%>
+    </div>
+    <h2>Check out <%=user.displayName%>'s events they are attending!</h2>
+    <%if(let i = 0; i < user.attendingEvents.length; i++%>
+        <div class='attendeeEvents'>
+            <img class ='eventPic' src="<%=user.createdEvents[i].eventPic%>">
+            <h3 class='eventTitle'>
+                <a href="events/<%=user.createdEvents[i]._id%>">
+                </a>        
+            </h3>
+            <h3 class='eventTime'>Date:<%=user.createdEvents[i].time%></h3>
+        </div>
+    <%}%>
+</body>
