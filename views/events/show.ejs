@@ -30,6 +30,12 @@
 </head>
   <body>
     <header>
+      <nav>
+        <a href="/users">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users">Profile</a>
+            <!-- Add user session id into profile href -->
+      </nav>
       <h1>Attendees for <%=event.name%></h1>
       <nav> <!-- May  not be needed considering we are doing a NAV bar but figured to have it till then -->
         <ul>
@@ -61,6 +67,9 @@
                   <li><a href="/users/<%=event.attendees[i]._id%>"><%=event.attendees[i].displayName%></a></li>
               <% } %>
           </ul>
+      </section>
+      <section>
+        <a href="/event/<%=user._id%>/edit">Edit Event</a>  <!-- need to check if it's the organizer's event before they can view this feature -->
       </section>
       <section>
         <form action="/event" method="POST">
