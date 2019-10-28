@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Attendess for the Event</title>
+</head>
+  <body>
+    <header>
+      <h1>Attendees for <%=event.name%></h1>
+      <nav> <!-- May  not be needed considering we are doing a NAV bar but figured to have it till then -->
+        <ul>
+          <li>
+            <a href="/">Home</a> 
+          </li>
+          <li>
+            <a href="/events">Events Index</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Event Details:</h2>   
+        <ul>
+          <li>Event: <%=event.name%></li>
+          <li>Event: <%=event.location%></li>
+          <li>Event: <%=event.date%></li>
+          <li>Event: <%=event.time%></li>
+          <li>Event: <%=event.eventPic%></li>
+          <li>Event: <%=event.description%></li>
+        </ul>
+      </section>
+      <section>
+          <h2>Attendees for <%=event.name%>:</h2> <!-- how do we get the user ID from when someone clicks attending -->
+          <ul>
+              <% for(let i = 0; i < event.users.length; i++){ %>
+                  <li><%=event.attendees[i]%></a></li>
+              <% } %>
+          </ul>
+      </section>
+      <section>
+        <form action="/event" method="POST">
+          <button type='Submit'>Attend!</button>
+        </form>
+        <form action="/event/<%=event.users._id%>?_method=DELETE" method="POST">  <!-- Delete user from event  -->
+          <button type='submit'>Backout</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
