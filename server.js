@@ -4,6 +4,7 @@ const PORT = 3000;
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const User = require('./models/users.js');
+const bcrypt = require('bcrypt.js');
 
 require('./db/db.js');
 
@@ -33,7 +34,9 @@ app.post('/registration', async (req, res) => {
         newUser.profilePic = req.body.profilePic
         newUser.location = req.body.location
         newUser.email = req.body.email
-        newUser.password = req.body.password
+        const password = req.body.password
+        const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+        newUser.password = passwordHash;
         if(req.body.isOrganizer === "on"){
             newUser.isOrganizer = true;
         } else{
