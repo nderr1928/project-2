@@ -12,21 +12,16 @@ router.get('/:id', async (req, res) =>{
 		if(foundUser.isOrganizer === true){
 		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
 		//user object and the organizers index.ejs is rendered. 
-			// foundUser.populate({path: 'createdEvents'})
-			// .exec()
 			res.render('organizers/index.ejs', {
 				user: foundUser
 			});
 		} else {
 		//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
 		//user object and the attendees index.ejs is rendered. 	
-			// foundUser.populate({path: 'attendingEvents'})
-			// .exec()
 			res.render('attendees/index.ejs', {
 				user: foundUser
 			})
 		}
-
 	} catch(err){
 		res.send(err);
 	}
@@ -39,16 +34,12 @@ router.get('/:id/show', async (req, res) =>{
 		if(foundUser.isOrganizer === true){
 		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
 		//user object and the organizers show.ejs is rendered. 
-			foundUser.populate({path: 'createdEvents'})
-			.exec()
 			res.render('organizers/show.ejs', {
 				user: foundUser
 			});
 		} else {
 		//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
 		//user object and the attendees show.ejs is rendered. 	
-			foundUser.populate({path: 'attendingEvents'})
-			.exec()
 			res.render('attendees/show.ejs', {
 				user: foundUser
 			})
