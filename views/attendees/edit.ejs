@@ -2,13 +2,17 @@
 <html>
 <head>
 	<title>Edit User</title>
-	<nav>
+
+</head>
+<header>
+		<nav>
         <a href="/users">Home</a>
         <a href="/events">Events</a>
         <a href="/users">Profile</a>
+        <a href='/auth/logout'>Logout</a>
             <!-- Add user session id into profile href -->
     </nav>
-</head>
+</header>
 <body>
 	<h1>Make changes to your profile below</h1>
 	<form action="/:id/<%=user._id%>?_method=PUT" method="post">

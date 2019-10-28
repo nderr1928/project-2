@@ -6,13 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Attendee's Profile</title>
 </head>
-<body>
-    <nav>
+<header>
+        <nav>
         <a href="/users">Home</a>
         <a href="/events">Events</a>
         <a href="/users">Profile</a>
+        <a href='/auth/logout'>Logout</a>
             <!-- Add user session id into profile href -->
     </nav>
+</header>
+<body>
     <div class='userHead'>
         <h1>Meet <%=user.displayName%></h1>
         <img class='profilePic' src="<%=user.profilePic%>">
@@ -23,9 +26,9 @@
     <h2>Check out <%=user.displayName%>'s events they are attending!</h2>
     <%if(let i = 0; i < user.attendingEvents.length; i++%>
         <div class='attendeeEvents'>
-            <img class ='eventPic' src="<%=user.createdEvents[i].eventPic%>">
+            <img class ='eventPic' src="<%=user.attendingEvents[i].eventPic%>">
             <h3 class='eventTitle'>
-                <a href="events/<%=user.createdEvents[i]._id%>">
+                <a href="events/<%=user.attendingEvents[i]._id%>">
                 </a>        
             </h3>
             <h3 class='eventTime'>Date:<%=user.createdEvents[i].time%></h3>

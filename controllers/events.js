@@ -49,8 +49,8 @@ router.get('/:id', async (req, res) => {
     // will find the id of the event clicked on
     const foundEvent = await Event.findById(req.params.id);
     // will populate found event with all the attendees signed up
-    foundEvent.populate({path: 'User'})
-    .exec()
+    // foundEvent.populate({path: 'User'})
+    // .exec()
     // render event show page
     res.render('events/show.ejs', {
       event: foundEvent
