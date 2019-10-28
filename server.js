@@ -27,13 +27,22 @@ app.get('/registration', async (req, res) => {
 
 app.post('/registration', async (req, res) => {
     try{
-        const newUser = await User.create(req.body);
+        const newUser = {};
+        newUser.name =  req.body.name
+        newUser.displayName = req.body.displayName
+        newUser.profilePic = req.body.profilePic
+        newUser.location = req.body.location
+        newUser.email = req.body.email
+        newUser.password = req.body.password
         if(req.body.isOrganizer === "on"){
-            newUser.isOrganizer === true;
+            newUser.isOrganizer = true;
         } else{
-            newUser.isOrganizer === false;
+            newUser.isOrganizer = false;
         }
-        res.redirect(`/users/${newUser._id}`);
+        // added the user to the db
+        const createdUser = await User.create(newUser);
+        console.log(createdUser);
+        res.redirect(`/users/${createdUser._id}`);
     } catch(err){
         res.send(err);
     }
