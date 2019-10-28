@@ -16,7 +16,9 @@ router.get('/', (req, res) => {
 
 // create route
 router.get('/new',async (req, res) => {
-    res.render('events/new.ejs');
+    res.render('events/new.ejs', {
+      userId: req.session.userId
+    });
 })
 
 // edit route
