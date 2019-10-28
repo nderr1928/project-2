@@ -3,10 +3,10 @@
 <head>
 	<title>Edit Organizer</title>
 	<nav>
-        <a href="/users/<%=req.session.id%>">Home</a>
-        <a href="/events">Events</a>
-        <a href="/users/<%=req.session.id%>">Profile</a>
-        <a href='/auth/logout'>Logout</a>
+            <a href="/users/<%=userId%>">Home</a>
+            <a href="/events">Events</a>
+            <a href="/users/<%=userId%>/show">Profile</a>
+            <a href='/auth/logout'>Logout</a>
 
             <!-- Add user session id into profile href -->
     </nav>
