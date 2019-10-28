@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/CSS/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-    <h1>Login page</h1>
-    <form action="users/index" method="get">
-        Email: <input name="email" type="email" placeholder="email"><br/>
-        Password: <input name="password" type="password" placeholder="password"><br/>
-        <button type='submit'>Login</button><br/>
-    </form>
-    <form action="/registration" method="get">
+<body class="homepage">
+    <h1>Grassroot Connections</h1>
+    
+    <div class="loginBox">
+        <form action="users/index" method="get" class="login">
+            Email <input name="email" type="email" placeholder="email"><br/>
+            Password <input name="password" type="password" placeholder="password"><br/>
+            <button type='submit'>Login</button><br/>
+        </form>
+    </div>
+    <form action="/registration" method="get" class="registration">
+        <h5>Don't have an account? Click below to register!</h5>
         <button type='Submit'>Create an account</button>
     </form>
 </body>

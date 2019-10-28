@@ -50,8 +50,8 @@ router.get('/:id', (req, res) => {
         } else {
             res.render('events/show.ejs', {
                 event: foundEvent
-        }
-        }
+        })
+      }
     })
 })
 
@@ -129,6 +129,7 @@ router.delete('/:id', async (req, res)=>{
     console.log(err)
     res.send(err);
   }
+});
 
 
 
