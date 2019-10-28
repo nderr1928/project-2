@@ -43,16 +43,20 @@ router.put('/:id', async (req, res) => {
 })
 
 //show route
-router.get('/:id', (req, res) => {
-    Event.findById(req.params.id, (err, foundEvent) => {
-        if (err){
-            res.send(err);
-        } else {
-            res.render('events/show.ejs', {
-                event: foundEvent
-        })
-      }
+router.get('/:id', async (req, res) => {
+  try{
+    // will find the id of the event clicked on
+    const foundEvent = await Event.findById(req.params.id);
+    // will populate found event with all the attendees signed up
+    foundEvent.populate({path: 'User'})
+    .exec()
+    // render event show page
+    res.render('events/show.ejs', {
+      event: foundEvent
     })
+  } catch(err){
+      res.send(err);
+  }
 })
 
 // post route
