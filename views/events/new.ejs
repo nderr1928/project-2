@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Create New Event</title>
+    <nav>
+        <a href="/users">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users">Profile</a>
+            <!-- Add user session id into profile href -->
+    </nav>
 </head>
 <body>
-    <h1>Create new event</h1>
+	<h1>Create Your Next Local Event</h1><br/>
+	<h2>Please fill out event information below</h2><br/>
+	<form action="/events" method="post">
+		Name: <input type="text" name="name" value="event.name"><br/>
+		Location: <input type="text" name="location" value="event.location"><br/>
+		Date: <input type="text" name="date" value="event.date"><br/>
+		Time: <input type="text" name="time" value="event.time"><br/>
+		Image URL: <input type="email" name="eventPic" value="event.eventPic"><br/>
+		Description: <input type="description" name="description" value="event.description"><br/>
+		<button type="submit">Register Event</button>
+	</form>
 </body>
 </html>
