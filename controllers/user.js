@@ -12,11 +12,7 @@ router.get('/:id', async (req, res) =>{
 		if(foundUser.isOrganizer === true){
 		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
 		//user object and the organizers index.ejs is rendered. 
-<<<<<<< HEAD
-			// foundUser.populate({path: 'createdEvents'})
-			// .exec()
-=======
->>>>>>> master
+
 			res.render('organizers/index.ejs', {
 				user: foundUser
 			});
