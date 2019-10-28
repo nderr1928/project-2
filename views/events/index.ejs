@@ -8,9 +8,9 @@
 </head>
 <header>
     <nav>
-        <a href="/users">Home</a>
+        <a href="/users/<%=req.session.id%>">Home</a>
         <a href="/events">Events</a>
-        <a href="/users">Profile</a>
+        <a href="/users/<%=req.session.id%>">Profile</a>
         <a href='/auth/logout'>Logout</a>
             <!-- Add user session id into profile href -->
     </nav>
