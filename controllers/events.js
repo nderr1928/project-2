@@ -39,11 +39,10 @@ router.get('/:id/edit', async (req, res) => {
 // edit part 2 to get back to show
 router.put('/:id', async (req, res) => {
     try{
-      console.log(req.params);
-        const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {new: true})
-        res.redirect(`/${req.params.id}`, {
-            event: updatedEvent
-        })
+      console.log(req.params.id);
+        const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        console.log(updatedEvent);
+        res.redirect(`/events/${req.params.id}`)
     } catch(err){
         res.send(err);
     }
@@ -103,7 +102,9 @@ router.post('/', async (req, res)=>{
       // that is returned from your model, you have to
       // save it
       // await foundUser.save();
-      res.redirect('/events');
+      res.redirect('/events', {
+        userId: req.session.userId
+      });
 
   } catch(err){
     console.log('errroor')
@@ -136,7 +137,9 @@ router.delete('/:id', async (req, res)=>{
     // now we can send a response back to the client
     // the browser
     console.log('after save')
-    res.redirect('/events')
+    res.redirect('/events', {
+      userId: req.session.userId
+    })
   } catch(err){
     console.log(err)
     res.send(err);
