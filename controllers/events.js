@@ -96,13 +96,15 @@ router.post('/', async (req, res)=>{
       // What is foundUser? What is it the result of? Read the code above
       // and think through it
       // foundUser.events.push(createdEvent);
-      const createdEvent = await Event.create(req.body);
-
+const createEvent = await Event.create(req.body);
+      const foundUser = await User.findById(req.session.userId);
+      foundUser.createdEvents.push(createEvent);
+      await foundUser.save();
       // remember when you mutate a document, something
       // that is returned from your model, you have to
       // save it
       // await foundUser.save();
-      res.redirect('/events');
+      res.redirect(`/users/${req.session.userId}`);
 
   } catch(err){
     console.log('errroor')
