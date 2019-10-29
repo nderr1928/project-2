@@ -102,9 +102,7 @@ router.post('/', async (req, res)=>{
       // that is returned from your model, you have to
       // save it
       // await foundUser.save();
-      res.redirect('/events', {
-        userId: req.session.userId
-      });
+      res.redirect('/events');
 
   } catch(err){
     console.log('errroor')
@@ -137,9 +135,7 @@ router.delete('/:id', async (req, res)=>{
     // now we can send a response back to the client
     // the browser
     console.log('after save')
-    res.redirect('/events', {
-      userId: req.session.userId
-    })
+    res.redirect('/events');
   } catch(err){
     console.log(err)
     res.send(err);
