@@ -96,7 +96,7 @@ router.post('/', async (req, res)=>{
       // What is foundUser? What is it the result of? Read the code above
       // and think through it
       // foundUser.events.push(createdEvent);
-const createEvent = await Event.create(req.body);
+      const createEvent = await Event.create(req.body);
       const foundUser = await User.findById(req.session.userId);
       foundUser.createdEvents.push(createEvent);
       await foundUser.save();

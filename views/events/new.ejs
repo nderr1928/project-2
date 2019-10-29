@@ -19,12 +19,12 @@
 	<h1>Create Your Next Local Event</h1><br/>
 	<h2>Please fill out event information below</h2><br/>
 	<form action="/events" method="post">
-		Name: <input type="text" name="name"><br/>
-		Location: <input type="text" name="location"><br/>
-		Date: <input type="text" name="date"><br/>
-		Time: <input type="text" name="time"><br/>
-		Image URL: <input type="text" name="eventPic"><br/>
-		Description: <input type="text" name="description"><br/>
+		Event Name: <input type="text" name="name" require="true"><br/>
+		Location: <input type="text" name="location" require="true"><br/>
+		Date: <input type="date" name="date" require="true"><br/>
+		Time: <input type="time" name="time" require="true"><br/>
+		Image URL: <input type="url" name="eventPic"><br/>
+		Description: <textarea type="text" name="description"></textarea><br/>
 		<button type="submit">Register Event</button>
 	</form>
 </body>
