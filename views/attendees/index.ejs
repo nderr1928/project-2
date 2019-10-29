@@ -16,9 +16,9 @@
 	<h1>Welcome<%=user.displayName%></h1>
 	<h2>Events You're Attending</h2>
 	<ul>
-		<li>
-			<!-- Event Name -->
-		</li>
+			<% for(let i = 0; i < user.attendingEvents.length; i++){ %>
+				<li><a href="/events/<%=user.attendingEvents[i]._id%>"><%=user.attendingEvents[i].name%></a></li>
+			<% } %>
 	</ul>
 </body>
 </html>
