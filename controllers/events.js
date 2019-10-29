@@ -4,14 +4,16 @@ const User = require('../models/users.js');
 const Event = require('../models/events.js');
 
 //index route
-router.get('/', (req, res) => {
-  Event.find({}, (err, allEvents) => {
-    res.render('events/index.ejs', {
-      events: allEvents,
-      userId: req.session.userId
-    });
-
-  });
+router.get('/', async (req, res) => {
+    try{
+      const allEvents = await Event.find({});
+      res.render('events/index.ejs', {
+        event: allEvents,
+        userId: req.session.userId
+      });
+    } catch(err){
+      res.send(err);
+    }
 });
 
 // create route
@@ -79,8 +81,8 @@ router.post('/', async (req, res)=>{
       // dependent on each other,
       // we can wait for the concurrently by using Promise.all as seen
       // below
-      const findUser = User.findById(req.body.userId);
-      const createEvent = Event.create(req.body);
+      // const findUser = User.findById(req.body.userId);
+      // const createEvent = Event.create(req.body);
 
       // Promise All returns an array of the repsonse from DB queries,
       // Using array destructing to save the corresponding responses
@@ -89,18 +91,18 @@ router.post('/', async (req, res)=>{
       // Basially what this is doing is creating varaibles for each index in the array that
       // is returned from await Promise.all([findevents, findUser])
       //if you are still confused look up array destructering, its fancy new javascript
-      const [foundUser, createdEvent] = await Promise.all([findUser, createEvent]);
+      // const [foundUser, createdEvent] = await Promise.all([findUser, createEvent]);
 
       // Is this where you are adding the events to the User's model
       // What is foundUser? What is it the result of? Read the code above
       // and think through it
-      foundUser.events.push(createdEvent);
-
+      // foundUser.events.push(createdEvent);
+      const createdEvent = await Event.create(req.body);
 
       // remember when you mutate a document, something
       // that is returned from your model, you have to
       // save it
-      await foundUser.save();
+      // await foundUser.save();
       res.redirect('/events');
 
   } catch(err){

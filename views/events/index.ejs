@@ -1,30 +1,23 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Events</title>
 </head>
 <header>
     <nav>
-            <a href="/users/<%=userId%>">Home</a>
-            <a href="/events">Events</a>
-            <a href="/users/<%=userId%>/show">Profile</a>
-            <a href='/auth/logout'>Logout</a>
-            <!-- Add user session id into profile href -->
+        <a href="/users/<%=userId%>">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users/<%=userId%>/show">Profile</a>
+        <a href='/auth/logout'>Logout</a>
     </nav>
 </header>
 <body>
-    <h1>Look at events</h1>
-    <div>Filter fuctions</div>
-    <div class="eventList">
-        <!-- List of events -->
-        <% for(let i = 0; i<events.length; i++){ %>
-            <div class="eventPreview">
-                events[i].title;
-            </div>
-        <% } %>
+    <h1>Upcoming Events</h1>
+    <div class= "eventList">
+        <%for(let i = 0; i < event.length; i++){%>
+            <p><%=event[i].name%></p>
+        <%}%>
     </div>
 </body>
 </html>
