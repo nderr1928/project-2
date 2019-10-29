@@ -52,7 +52,8 @@ router.put('/:id', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try{
     // will find the id of the event clicked on
-    const foundEvent = await Event.findById(req.params.id);
+    const foundEvent = await Event.findById(req.params.id)
+      .populate({path: 'attendees'}).exec();
     // will populate found event with all the attendees signed up
     // foundEvent.populate({path: 'User'})
     // .exec()
@@ -60,6 +61,7 @@ router.get('/:id', async (req, res) => {
     res.render('events/show.ejs', {
       event: foundEvent,
       userId: req.session.userId
+
     })
   } catch(err){
       res.send(err);
@@ -112,6 +114,56 @@ router.post('/', async (req, res)=>{
   }
 });
 
+router.post('/:id', async (req, res) => {
+  try {
+   // delete the user from the
+
+    const findAttendee = await User.findOne({_id:req.session.userId});
+    console.log(findAttendee)
+    //find event by id that relates to array
+    const findEvent = await Event.findById(req.params.id)
+    // if (findAttendee = user.findOne) {
+    //   findEvent.event.findOne
+    // }
+    // find the user the event belongs too
+    findEvent.attendees.push(findAttendee)
+
+    await findEvent.save()
+
+    console.log(findEvent.attendees)
+    res.redirect(`/events/${req.params.id}`)
+    // const findEvent = User.findOne({'events': req.params.id});
+
+
+  } catch(err) {
+    console.log('errrrrror')
+    res.send(err)
+  }
+
+})
+//backout
+// router.post('/:id', async (req, res) => {
+//   try {
+//    // delete the user from the
+//     const findAttendee = await User.findById(req.sessions.userId);
+
+//     //find event by id that relates to array
+//     const findEvent = await Event.findById(req.params.id)
+//     // find the user the event belongs too
+//     findEvent.attendees.splice(findEvent.findIndex(user.session.userId), 1)
+
+//     await findEvent.save()
+//     console.log(findEvent.attendees)
+//     res.redirect(`/events/${req.params.id}`)
+//     // const findEvent = User.findOne({'events': req.params.id});
+
+
+//   } catch(err) {
+//     console.log('errrrrror')
+//     res.send(err)
+//   }
+
+// })
 
 
 router.delete('/:id', async (req, res)=>{
