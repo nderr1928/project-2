@@ -114,6 +114,8 @@ router.post('/', async (req, res)=>{
 
 
 
+
+
 router.delete('/:id', async (req, res)=>{
   // when we delete an event, we want to remove that
   // event from the event array
