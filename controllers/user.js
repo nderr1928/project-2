@@ -9,7 +9,9 @@ const User = require('../models/users.js');
 router.get('/:id', async (req, res) =>{
 	try{
 		//User is found by their Id
-		const foundUser = await User.findById(req.params.id);
+		const foundUser = await User.findById(req.params.id)
+		.populate({path: 'createdEvents'})
+		.exec();
 		if(foundUser.isOrganizer === true){
 		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
 		//user object and the organizers index.ejs is rendered. 
@@ -34,8 +36,9 @@ router.get('/:id', async (req, res) =>{
 //Show route
 router.get('/:id/show', (req, res) =>{
 	User.findById(req.params.id)
-	.populate({path: 'photos'})
+	.populate({path: 'createdEvents'})
 	.exec((err, foundUser) =>{
+		console.log(foundUser)
 		if(err){
 			res.send(err);
 		} else if(foundUser.isOrganizer === true){

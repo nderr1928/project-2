@@ -19,16 +19,10 @@
         <img class='profilePic' src="<%=user.profilePic%>">
     </div>
     <h2>Check out <%=user.displayName%>'s upcoming events!</h2>
-<!--     <if(let i = 0; i < user.createdEvents.length; i++)%>
-        <div class='organizerEvents'>
-            <img class ='eventPic' src="<=user.createdEvents[i].eventPic%>">
-            <h3 class='eventTitle'>
-                <a href="events/<=user.createdEvents[i]._id%>">
-                    <=user.createdEvents[i].name%>
-                </a>        
-            </h3>
-            <h3 class='eventTime'>Date:<=user.createdEvents[i].time%></h3>
-        </div>
-    <}%> -->
+    <ul>
+         <% for(let i = 0; i < user.createdEvents.length; i++){ %>
+            <li><a href="/events/<%=user.createdEvents[i]._id%>"><%=user.createdEvents[i].name%></a></li>
+        <% } %>
+    </ul>
 </body>
 </html>
