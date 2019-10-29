@@ -98,14 +98,13 @@ router.post('/', async (req, res)=>{
       // foundUser.events.push(createdEvent);
       const createEvent = await Event.create(req.body);
       const foundUser = await User.findById(req.session.userId);
-      const [organizer, createdEvent] = await Promise.all([foundUser, createEvent]);
-      organizer.createdEvents.push(createdEvent);
-      await organizer.save();
+      foundUser.createdEvents.push(createEvent);
+      await foundUser.save();
       // remember when you mutate a document, something
       // that is returned from your model, you have to
       // save it
       // await foundUser.save();
-      res.redirect('/events');
+      res.redirect(`/users/${req.session.userId}`);
 
   } catch(err){
     console.log('errroor')
