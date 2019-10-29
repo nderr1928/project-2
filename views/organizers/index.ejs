@@ -15,6 +15,11 @@
 </head>
 <body>
     <h1> Organizer index</h1>
+    <ul>
+         <% for(let i = 0; i < user.createdEvents.length; i++){ %>
+            <li><a href="/events/<%=user.createdEvents[i]._id%>"><%=user.createdEvents[i].name%></a></li>
+        <% } %>
+    </ul>
     <form action="/events/new" method="get">
         <button type="submit">Create new event</button>
     </form>
