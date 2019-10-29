@@ -119,22 +119,24 @@ router.post('/:id', async (req, res) => {
    // delete the user from the
 
     const findAttendee = await User.findOne({_id:req.session.userId});
-    console.log(findAttendee)
     //find event by id that relates to array
     const findEvent = await Event.findById(req.params.id)
+    console.log("Found attendee:", findAttendee._id);
+    console.log("Found event:", findEvent._id);
     // if (findAttendee = user.findOne) {
     //   findEvent.event.findOne
     // }
     // find the user the event belongs too
     findEvent.attendees.push(findAttendee)
+    findAttendee.attendingEvents.push(findEvent)
 
+    await findAttendee.save()
     await findEvent.save()
 
-    console.log(findEvent.attendees)
+    console.log(findAttendee.attendingEvents);
+    console.log(findEvent.attendees);
     res.redirect(`/events/${req.params.id}`)
     // const findEvent = User.findOne({'events': req.params.id});
-
-
   } catch(err) {
     console.log('errrrrror')
     res.send(err)
