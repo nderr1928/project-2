@@ -16,7 +16,7 @@
     <h1>Upcoming Events</h1>
     <div class= "eventList">
         <%for(let i = 0; i < event.length; i++){%>
-            <p><%=event[i].name%></p>
+            <p><a href="/events/<%=event[i]._id%>"><%=event[i].name%></a></p>
         <%}%>
     </div>
 </body>
