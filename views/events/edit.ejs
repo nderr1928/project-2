@@ -20,8 +20,8 @@
     <form action="/events/<%=event._id%>?_method=PUT" method="post">
 		Name: <input type="text" name="name" value="<%=event.name%>"><br/>
 		Location: <input type="text" name="location" value="<%=event.location%>"><br/>
-		Date: <input type="text" name="date" value="<%=event.date%>"><br/>
-		Time: <input type="text" name="time" value="<%=event.time%>"><br/>
+		Date: <input type="date" name="date" value="<%=event.date%>"><br/>
+		Time: <input type="time" name="time" value="<%=event.time%>"><br/>
 		Image URL: <input type="text" name="eventPic" value="<%=event.eventPic%>"><br/>
 		Description: <input type="text" name="description" value="<%=event.description%>"><br/>
 		<button type="submit">Register Event</button>
