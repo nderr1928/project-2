@@ -86,30 +86,41 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Post route to get the attend button to push to the event attendees array
 router.post('/:id', async (req, res) => {
   try {
-    const findAttendee = await User.findById({_id: req.session.userId}); // get the current users information from the session ID
-    const findEvent = await Event.findById(req.params.id); //find event by id that relates to array
-    // console logs to see what is going through
+    const findAttendee = await User.findOne({_id:req.session.userId});
+    //find event by id that relates to array
+    const findEvent = await Event.findById(req.params.id)
     console.log("Found attendee:", findAttendee._id);
     console.log("Found event:", findEvent._id);
+    // if (findAttendee = user.findOne) {
+    //   findEvent.event.findOne
+    // }
+    // find the user the event belongs too
+    console.log(findEvent);
 
-    findEvent.attendees.push(findAttendee); // push the user to the events attendee array
-    findAttendee.attendingEvents.push(findEvent); // push the event to the users attending events array
-    await findAttendee.save(); //save the attendee array
-    await findEvent.save(); //save the event array
+
+    //if event attendee = user attender, then do nothing,  else push
+    if (findEvent.attendees.indexOf(findAttendee._id) === -1) {
+      findEvent.attendees.push(findAttendee)
+      findAttendee.attendingEvents.push(findEvent)
+    } else {
+      console.log('derpderpDERPPP')
+      prompt('You are already attending - invite your friends!');
+    }
+      await findAttendee.save()
+      await findEvent.save()
 
     //console log to see if everything updated correctly
     console.log(findAttendee.attendingEvents);
     console.log(findEvent.attendees);
-    // redirect the the event show page
-    res.redirect(`/events/${req.params.id}`);
+    res.redirect(`/events/${req.params.id}`)
+    // const findEvent = User.findOne({'events': req.params.id});
   } catch(err) {
-      console.log('error');
-      res.send(err);
+    console.log('errrrrror')
+    res.send(err)
   }
-});
+})
 
 //backout
 // router.post('/:id', async (req, res) => {
