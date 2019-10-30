@@ -4,29 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Attendee's Profile</title>
+    <title><%=user.displayName%>'s Profile</title>
 </head>
 <header>
-        <nav>
-            <a href="/users/<%=userId%>">Home</a>
-            <a href="/events">Events</a>
-            <a href="/users/<%=userId%>/show">Profile</a>
-            <a href='/auth/logout'>Logout</a>
-            <a href="/users/<%=userId%>/edit">Edit your profile!</a>
-            <!-- Add user session id into profile href -->
+    <nav>
+        <a href="/users/<%=userId%>">Home</a>
+        <a href="/events">Events</a>
+        <a href='/auth/logout'>Logout</a>
+        <a href="/users/<%=userId%>/edit">Edit your profile!</a>
     </nav>
 </header>
 <body>
     <div class='userHead'>
-        <h1>Meet <%=user.displayName%></h1>
-        <img class='profilePic' src="<%=user.profilePic%>">
-        Name: <%=user.name%>
-        Location: <%=user.location%>
-        Email: <%=user.location%>
+        <h1><%=user.displayName%></h1>
+        <img class='profilePic' src="<%=user.profilePic%>"><br/>
+        Name: <%=user.name%><br/>
+        Location: <%=user.location%><br/>
+        Email: <%=user.location%><br/>
     </div>
-    <h2>Check out <%=user.displayName%>'s events they are attending!</h2>
+    <h2>Events <%=user.displayName%> Is Attending!</h2>
+    <div class="eventsList">
         <% for(let i = 0; i < user.attendingEvents.length; i++){ %>
-            <li><a href="/events/<%=user.attendingEvents[i]._id%>"><%=user.attendingEvents[i].name%></a></li>
-        <% } %>
+            <li>
+                <a href="/events/<%=user.attendingEvents[i]._id%>">
+                    <%=user.attendingEvents[i].name%>
+                </a>
+            </li>
+        <%}%>
+    </div> 
 </body>
 </html>

@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>User Index Page</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Home Page</title>
 </head>
 <header>
     <nav>
-            <a href="/users/<%=userId%>">Home</a>
-            <a href="/events">Events</a>
-            <a href="/users/<%=userId%>/show">Profile</a>
-            <a href='/auth/logout'>Logout</a>
-            <a href="/users/<%=userId%>/edit">Edit your profile!</a>
-            <!-- Add user session id into profile href -->
+        <a href="/events">Events</a>
+        <a href="/users/<%=userId%>/show">Profile</a>
+        <a href='/auth/logout'>Logout</a>
+        <a href="/users/<%=userId%>/edit">Edit your profile!</a>
     </nav>
 </header>
 <body>
-	<h1>Welcome<%=user.displayName%></h1>
-	<h2>Events You're Attending</h2>
-	<ul>
+	<h1>Welcome<%=user.displayName%>!</h1>
+    <h2>Upcoming Events You're Attending</h2>
+    <div class="eventsList">
+		<ul>
 			<% for(let i = 0; i < user.attendingEvents.length; i++){ %>
-				<li><a href="/events/<%=user.attendingEvents[i]._id%>"><%=user.attendingEvents[i].name%></a></li>
-			<% } %>
-	</ul>
+				<li>
+					<a href="/events/<%=user.attendingEvents[i]._id%>">
+						<%=user.attendingEvents[i].name%>
+					</a>
+				</li>
+			<%}%>
+		</ul>
+	</div>
 </body>
 </html>

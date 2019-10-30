@@ -1,23 +1,29 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Events</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upcoming Events</title>
 </head>
 <header>
     <nav>
         <a href="/users/<%=userId%>">Home</a>
-        <a href="/events">Events</a>
         <a href="/users/<%=userId%>/show">Profile</a>
         <a href='/auth/logout'>Logout</a>
         <a href="/users/<%=userId%>/edit">Edit your profile!</a>
     </nav>
 </header>
 <body>
-    <h1>Upcoming Events</h1>
-    <div class= "eventList">
+    <h1>Upcoming Events That Might Interest You</h1>
+    <div class="eventsList">
         <%for(let i = 0; i < event.length; i++){%>
-            <p><a href="/events/<%=event[i]._id%>"><%=event[i].name%></a></p>
+            <p>
+                <a href="/events/<%=event[i]._id%>">
+                    <%=event[i].name%>    
+                </a>
+            </p>
         <%}%>
     </div>
 </body>

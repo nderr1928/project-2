@@ -4,35 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create New Event</title>
+    <title>New Event</title>
 </head>
 <header>
-		<nav>
-            <a href="/users/<%=userId%>">Home</a>
-            <a href="/events">Events</a>
-            <a href="/users/<%=userId%>/show">Profile</a>
-            <a href='/auth/logout'>Logout</a>
-            <a href="/users/<%=userId%>/edit">Edit your profile!</a>
-            <!-- Add user session id into profile href -->
-    </nav>
+	<nav>
+        <a href="/users/<%=userId%>">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users/<%=userId%>/show">Profile</a>
+        <a href='/auth/logout'>Logout</a>
+        <a href="/users/<%=userId%>/edit">Edit your profile!</a>
+	</nav>
 </header>
 <body>
-	<h1>Create Your Next Local Event</h1><br/>
-	<h2>Please fill out event information below</h2><br/>
-	<form action="/events" method="post">
-		Event Name: <input type="text" name="name" require="true"><br/>
-		Location: <input type="text" name="location" require="true"><br/>
-		Date: <input type="date" name="date" require="true"><br/>
-		Time: <input type="time" name="time" require="true"><br/>
-		Image URL: <input type="url" name="eventPic"><br/>
-		Description: <textarea type="text" name="description"></textarea><br/>
-		<button type="submit">Register Event</button>
-	</form>
+	<h1>Create Your Next Event</h1>
+	<div class='newEventForm'>
+		<form action="/events" method="post">
+			Event Name: <input type="text" name="name" require="true"><br/>
+			Location: <input type="text" name="location" require="true"><br/>
+			Date: <input type="date" name="date" require="true"><br/>
+			Time: <input type="time" name="time" require="true"><br/>
+			Event Pic: <input type="url" name="eventPic"><br/>
+			Description: <textarea type="text" name="description"></textarea><br/>
+			<button type="submit">Register Event</button>
+		</form>
+	</div>
 </body>
 </html>
-
-
-<!-- **will create an event but wont associate with any user until we do sessions
- -->
-<!-- If you give value in a new page it will submit the value and not the input -->
-<!-- When you are on an edit you want to put value in there b/c you need something to start with -->

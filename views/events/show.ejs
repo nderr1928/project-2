@@ -1,75 +1,44 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Look at events</h1>
-    <nav>
-        <a href="/users">Home</a>
-        <a href="/events">Events</a>
-        <a href="/users">Profile</a> -->
-            <!-- Add user session id into profile href -->
-<!--     </nav>
-    <div>Filter fuctions</div>
-    <div>List of events</div>
-</body>
-</html> -->
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Attendess for the Event</title>
 </head>
-  <body>
-        <nav>
-          <a href="/users/<%=userId%>">Home</a>
-          <a href="/events">Events</a>
-          <a href="/users/<%=userId%>/show">Profile</a>
-          <a href='/auth/logout'>Logout</a>
-          <a href="/users/<%=userId%>/edit">Edit your profile!</a>
-          <!-- Add user session id into profile href -->
-        </nav>
-    <h1>Attendees for <%=event.name%></h1>
-      
-    <main>
-      <section>
-        <h2>Event Details:</h2>   
-        <ul>
-          <li>Event Name: <%=event.name%></li>
-          <li>Event Location: <%=event.location%></li>
-          <li>Event Date: <%=event.date%></li>
-          <li>Event Time: <%=event.time%></li>
-          <li>Event Pic: <%=event.eventPic%></li>
-          <li>Event Description: <%=event.description%></li>
-        </ul>
-      </section>
-      <section>
-          <h2>Attendees for <%=event.name%>:</h2> <!-- how do we get the user ID from when someone clicks attending -->
+<header>
+    <nav>
+        <a href="/users/<%=userId%>">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users/<%=userId%>/show">Profile</a>
+        <a href='/auth/logout'>Logout</a>
+        <a href="/users/<%=userId%>/edit">Edit your profile!</a>
+    </nav>
+</header>        
+<body>
+    <div class="eventList">              
+        <h1><%=event.name%></h1>
+        <img class='eventPic' src="<%=event.eventPic%>"><br/>
+        Event Description: <%=event.description%><br/>
+        Event Location: <%=event.location%><br/>
+        Event Date: <%=event.date%><br/>
+        Event Time: <%=event.time%><br/>
+    </div> 
+    <div class="attendeesList">
+      <h2>Attendees</h2>
           <ul>
               <% for(let i = 0; i < event.attendees.length; i++){ %>
-                  <li><a href="/users/<%=event.attendees[i]._id%>"><%=event.attendees[i].displayName%></a></li>
-              <% } %>
+                  <li>
+                      <a href="/users/<%=event.attendees[i]._id%>/show">
+                          <%=event.attendees[i].displayName%>
+                      </a>
+                  </li>
+              <%}%>
           </ul>
-      </section>
-      <section>
-        <a href="/events/<%=event._id%>/edit">Edit Event</a>  <!-- need to check if it's the organizer's event before they can view this feature -->
-      </section>
-      <section>
-        <form action="/events/<%=event._id%>" method="POST">
-          <button type='Submit'>Attend!</button>
-        </form>
-<!--         <form action="/events/" method="POST"> Delete user from event 
- --><!--           <button type='submit'>Backout</button> -->
-<!--         </form> -->
-      </section>
-    </main>
+    </div>
+    <a href="/events/<%=event._id%>/edit">Edit Event</a>
+    <form action="/events/<%=event._id%>" method="POST">
+        <button type='Submit'>Attend!</button>
+    </form>
   </body>
 </html>
