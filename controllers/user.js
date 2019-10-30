@@ -4,25 +4,23 @@ const Event = require('../models/events.js');
 const User = require('../models/users.js');
 
 
-//Index Route
-
+//Index Route for users
 router.get('/:id', async (req, res) =>{
 	try{
 		//User is found by their Id
-		console.log("populating attending routes");
-		const foundUser = await User.findById(req.params.id)
-		.populate({path: 'attendingEvents'})
-		.exec();
-		console.log("check for profile type");
-		if(foundUser.isOrganizer === true){
-		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
-		//user object and the organizers index.ejs is rendered.
+		// console.log("populating attending routes");
+		const foundUser = await User.findById(req.params.id) // find user id based on req/paras.id
+			.populate({path: 'attendingEvents'}) //populate thier attendingEvents array
+			.exec(); //execute population
+		// console.log("check for profile type");
+		if(foundUser.isOrganizer === true){ // check if user is an organizer or not
+			//if organizer, populate the created events routes
+			// console.log("populate organzier made events")
 			const organizerUser = await User.findById(req.params.id)
-			.populate({path: 'createdEvents'})
-			.exec(); 
-			console.log("populate organzier made events")
-			// await foundUser.populate({path: 'createdEvents'}).exec();
-			console.log("made events populated")
+				.populate({path: 'createdEvents'})
+				.exec(); 
+			// console.log("made events populated")
+			// render the organizer index page with the populated variables and session ID
 			res.render('organizers/index.ejs', {
 				user: foundUser,
 				organizer: organizerUser,
@@ -31,7 +29,7 @@ router.get('/:id', async (req, res) =>{
 		} else {
 		//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
 		//user object and the attendees index.ejs is rendered. 	
-		console.log("attendee page loaded");	
+		// console.log("attendee page loaded");	
 		res.render('attendees/index.ejs', {
 				user: foundUser,
 				userId: req.session.userId
@@ -43,62 +41,37 @@ router.get('/:id', async (req, res) =>{
 });
 
 //Show route
-	router.get('/:id/show', (req, res) =>{
-		
-		User.findById(req.params.id)
-		.populate({path: 'attendingEvents'})
-		.exec((err, foundUser) =>{
-			console.log(foundUser)
-			if(err){
-				res.send(err);
-			} else if(foundUser.isOrganizer === true){
-				User.findById(req.params.id)
-				.populate({path:'createdEvents'})
-				.exec((err, foundUserCreated) =>{
-					if(err){
-						res.send(err);
-					} else {
-					res.render('organizers/show.ejs', {
-						user: foundUser,
-						userCreated: foundUserCreated,
-						userId: req.session.userId
-					});
-				}	
+router.get('/:id/show', async (req, res) =>{
+	try{
+		const foundUser = User.findById(req.params.id)
+			.populate({path: 'attendingEvents'})
+			.exec();
+		if(foundUser.isOrganizer === true){ // check if user is an organizer or not
+			//if organizer, populate the created events routes
+			// console.log("populate organzier made events")
+			const organizerUser = await User.findById(req.params.id)
+				.populate({path: 'createdEvents'})
+				.exec(); 
+			// console.log("made events populated")
+			// render the organizer index page with the populated variables and session ID
+			res.render('organizers/show.ejs', {
+				user: foundUser,
+				organizer: organizerUser,
+				userId: req.session.userId
+			});
+		} else {
+		//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
+		//user object and the attendees index.ejs is rendered. 	
+		// console.log("attendee page loaded");	
+		res.render('attendees/show.ejs', {
+				user: foundUser,
+				userId: req.session.userId
 			})
-
-			} else {
-				res.render('attendees/show.ejs', {
-					user: foundUser,
-					userId: req.session.userId
-				});
-			}
-		})
-	// try{
-	// 	const foundUser = await User.findById(req.params.id)
-	// 		.populate({path: 'attendingEvents'})
-	// 		.exec();
-	// 	if(foundUser.isOrganizer === true){
-	// 		await foundUser.populate({path: 'createdEvents'}).exec();
-	// 		res.render('organizers/show.ejs', {
-	// 			user: foundUser,
-	// 			userId: req.session.userId
-	// 		});
-	// 	} else {
-	// 		res.render('attendees/show.ejs', {
-	// 			user: foundUser,
-	// 			userId: req.session.userId
-	// 		});
-	// 	}
-	// } catch(err){
-	// 	res.send(err);
-	// }
-})
-
-//Create --Serever
-//Post -- Server
-//Edit -- Here
-//Put -- Here
-//Destroy -- Here
+		}
+	} catch(err){
+		res.send(err);
+	}
+});
 
 //Edit Route
 router.get('/:id/edit', async (req, res) =>{
@@ -124,7 +97,7 @@ router.get('/:id/edit', async (req, res) =>{
 	}
 });
 
-//Put route
+//Put route for edit
 router.put('/:id', async (req, res) =>{
 	try{
 		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
@@ -140,24 +113,36 @@ router.put('/:id', async (req, res) =>{
 	}
 });
 
-router.delete(':id', async (req, res) =>{
+// Delete user route
+router.delete('/:id', async (req, res) =>{
 	try{
-	const deletedUser = await User.findByIdAndRemove(req.params.id);
-	if(deletedUser.isOrganizer === true){
-		Event.remove({
-			_id: {
-				$in: deletedUser.createdEvents
+		const foundUser = await User.findById(req.params.body);
+		if(foundUser.isOrganizer === true){
+			// need to delete all the created events
+				//go into those deleted event sand find all the attendees
+					//delete the deleted event(s) from those attendees "attending events" array
+			// delete the user from database
+			// reroute to the main index page
+			res.redirect('/');
+		} else{
+			// go into all events attending and remove them from those events attendees list
+			const userEventsAttending = foundUser.attendingEvents;
+			console.log("Events the deleted user was going to attend:", userEventsAttending);
+			for(let i = 0; i < userEventsAttending.length; i++){
+				console.log("finding event id:", userEventsAttending[i])
+				let foundEvent = await Event.findById(userEventsAttending[i]);
+				console.log("event found:",foundEvent.attendees)
+				await foundEvent.attendees.findManyAndRemove({id: req.params.id});
+				console.log("attendee removed:", foundEvent.attendee);
+				await foundEvent.save();
+				console.log("event updated");
 			}
-		});
-		res.redirect('/registration');
-	} else {
-		Event.remove({
-			_id: {
-				$in: deletedUser.attendingEvents
-			}
-		});
-		res.redirect('/registration');
-	}
+			//delete the user
+			console.log("deleting user");
+			await foundUser.remove();
+			console.log("user deleted");
+			res.redirect('/');
+		}
 	} catch(err){
 		res.send(err);
 	}

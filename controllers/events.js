@@ -106,7 +106,7 @@ router.post('/:id', async (req, res) => {
       findAttendee.attendingEvents.push(findEvent)
     } else {
       console.log('derpderpDERPPP')
-      prompt('You are already attending - invite your friends!');
+      // prompt('You are already attending - invite your friends!');
     }
       await findAttendee.save()
       await findEvent.save()
