@@ -24,14 +24,8 @@
         Email: <%=user.location%>
     </div>
     <h2>Check out <%=user.displayName%>'s events they are attending!</h2>
-<!--     <if(let i = 0; i < user.attendingEvents.length; i++%>
-        <div class='attendeeEvents'>
-            <img class ='eventPic' src="<=user.attendingEvents[i].eventPic%>">
-            <h3 class='eventTitle'>
-                <a href="events/<=user.attendingEvents[i]._id%>">
-                </a>        
-            </h3>
-            <h3 class='eventTime'>Date:<=user.createdEvents[i].time%></h3>
-        </div>
-    <}%> -->
+        <% for(let i = 0; i < user.attendingEvents.length; i++){ %>
+            <li><a href="/events/<%=user.attendingEvents[i]._id%>"><%=user.attendingEvents[i].name%></a></li>
+        <% } %>
 </body>
+</html>

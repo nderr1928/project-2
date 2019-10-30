@@ -9,21 +9,30 @@ const User = require('../models/users.js');
 router.get('/:id', async (req, res) =>{
 	try{
 		//User is found by their Id
+		console.log("populating attending routes");
 		const foundUser = await User.findById(req.params.id)
-		.populate({path: 'createdEvents'})
+		.populate({path: 'attendingEvents'})
 		.exec();
+		console.log("check for profile type");
 		if(foundUser.isOrganizer === true){
 		//If the found user is registered as an organizer, 'createdEvents' array is populated into 
-		//user object and the organizers index.ejs is rendered. 
-			console.log(req.session)
+		//user object and the organizers index.ejs is rendered.
+			const organizerUser = await User.findById(req.params.id)
+			.populate({path: 'createdEvents'})
+			.exec(); 
+			console.log("populate organzier made events")
+			// await foundUser.populate({path: 'createdEvents'}).exec();
+			console.log("made events populated")
 			res.render('organizers/index.ejs', {
 				user: foundUser,
+				organizer: organizerUser,
 				userId: req.session.userId
 			});
 		} else {
 		//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
 		//user object and the attendees index.ejs is rendered. 	
-			res.render('attendees/index.ejs', {
+		console.log("attendee page loaded");	
+		res.render('attendees/index.ejs', {
 				user: foundUser,
 				userId: req.session.userId
 			})
@@ -34,50 +43,56 @@ router.get('/:id', async (req, res) =>{
 });
 
 //Show route
-router.get('/:id/show', (req, res) =>{
-	User.findById(req.params.id)
-	.populate({path: 'createdEvents'})
-	.exec((err, foundUser) =>{
-		console.log(foundUser)
-		if(err){
-			res.send(err);
-		} else if(foundUser.isOrganizer === true){
-			res.render('organizers/show.ejs', {
-				user: foundUser,
-				userId: req.session.userId
-			});
-		} else {
-			res.render('attendees/show.ejs', {
-				user: foundUser,
-				userId: req.session.userId
-			});
-		}
-	})
+	router.get('/:id/show', (req, res) =>{
+		
+		User.findById(req.params.id)
+		.populate({path: 'attendingEvents'})
+		.exec((err, foundUser) =>{
+			console.log(foundUser)
+			if(err){
+				res.send(err);
+			} else if(foundUser.isOrganizer === true){
+				User.findById(req.params.id)
+				.populate({path:'createdEvents'})
+				.exec((err, foundUserCreated) =>{
+					if(err){
+						res.send(err);
+					} else {
+					res.render('organizers/show.ejs', {
+						user: foundUser,
+						userCreated: foundUserCreated,
+						userId: req.session.userId
+					});
+				}	
+			})
+
+			} else {
+				res.render('attendees/show.ejs', {
+					user: foundUser,
+					userId: req.session.userId
+				});
+			}
+		})
 	// try{
-	// 	const foundUser = await User.findById(req.params.id);
+	// 	const foundUser = await User.findById(req.params.id)
+	// 		.populate({path: 'attendingEvents'})
+	// 		.exec();
 	// 	if(foundUser.isOrganizer === true){
-	// 	//If the found user is registered as an organizer, 'createdEvents' array is populated into 
-	// 	//user object and the organizers show.ejs is rendered. 
-	// 		foundUser.populate({path: 'createdEvents'}).exec();
-	// 		console.log(foundUser);
+	// 		await foundUser.populate({path: 'createdEvents'}).exec();
 	// 		res.render('organizers/show.ejs', {
 	// 			user: foundUser,
 	// 			userId: req.session.userId
-
 	// 		});
 	// 	} else {
-	// 	//If the found user is NOT registered as an organizer, 'attendingEvents' array is populated into 
-	// 	//user object and the attendees show.ejs is rendered. 	
 	// 		res.render('attendees/show.ejs', {
 	// 			user: foundUser,
 	// 			userId: req.session.userId
-	// 		})
-	// 	}		
-
-	// } catch(err) {
+	// 		});
+	// 	}
+	// } catch(err){
 	// 	res.send(err);
 	// }
-});
+})
 
 //Create --Serever
 //Post -- Server
