@@ -6,37 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<header>
     <nav>
-            <a href="/users/<%=userId%>">Home</a>
-            <a href="/events">Events</a>
-            <a href="/users/<%=userId%>/show">Profile</a>
-            <a href='/auth/logout'>Logout</a>
-            <a href="/users/<%=userId%>/edit">Edit your profile!</a>
-            <!-- Add user session id into profile href -->
+        <a href="/users/<%=userId%>">Home</a>
+        <a href="/events">Events</a>
+        <a href='/auth/logout'>Logout</a>
+        <a href="/users/<%=userId%>/edit">Edit your profile!</a>
     </nav>
+</header>    
+<body>    
     <div class='userHead'>
-        <h1>Meet <%=user.displayName%></h1>
-        <img class='profilePic' src="<%=user.profilePic%>">
+        <h1><%=user.displayName%></h1>
+        <img class='profilePic' src="<%=user.profilePic%>"><br/>
+        Name: <%=user.name%><br/>
+        Location: <%=user.location%><br/>
+        Email: <%=user.location%><br/>
     </div>
-    <h2>Check out <%=user.displayName%>'s upcoming events!</h2>
-    <ul>
-         <% for(let i = 0; i < userCreated.createdEvents.length; i++){ %>
-            <li>
-                <a href="/events/<%=userCreated.createdEvents[i]._id%>">
-                    <%=userCreated.createdEvents[i].name%>    
+    <h2>Check out <%=user.displayName%>'s Upcoming Events!</h2>
+    <div class='eventsList'>
+        <ul>
+            <% for(let i = 0; i < userCreated.createdEvents.length; i++){ %>
+                <li>
+                    <a href="/events/<%=userCreated.createdEvents[i]._id%>">
+                        <%=userCreated.createdEvents[i].name%>    
                     </a>
                 </li>
-        <% } %>
-    </ul>
+            <%}%>
+        </ul>
+    </div>
     <h2>Attending Events</h2>
-    <ul>
+    <div class="eventsList">
+        <ul>
             <% for(let i = 0; i < user.attendingEvents.length; i++){ %>
-                <li><a href="/events/<%=user.attendingEvents[i]._id%>">
-                    <%=user.attendingEvents[i].name%>   
+                <li>
+                    <a href="/events/<%=user.attendingEvents[i]._id%>">
+                        <%=user.attendingEvents[i].name%>   
                     </a>
                 </li>
-            <% } %>
-    </ul>
+            <%}%>
+        </ul>
+    </div>
 </body>
 </html>
