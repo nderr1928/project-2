@@ -86,7 +86,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/:id', async (req, res) => {
+router.post('/:id/attendee', async (req, res) => {
   try {
     const findAttendee = await User.findOne({_id:req.session.userId});
     //find event by id that relates to array
@@ -99,17 +99,17 @@ router.post('/:id', async (req, res) => {
     // find the user the event belongs too
     console.log(findEvent);
 
-
+    //Add Attendee
     //if event attendee = user attender, then do nothing,  else push
     if (findEvent.attendees.indexOf(findAttendee._id) === -1) {
       findEvent.attendees.push(findAttendee)
       findAttendee.attendingEvents.push(findEvent)
     } else {
       console.log('derpderpDERPPP')
-      prompt('You are already attending - invite your friends!');
+      // prompt('You are already attending - invite your friends!');
     }
-      await findAttendee.save()
-      await findEvent.save()
+    await findAttendee.save()
+    await findEvent.save()
 
     //console log to see if everything updated correctly
     console.log(findAttendee.attendingEvents);
@@ -120,6 +120,39 @@ router.post('/:id', async (req, res) => {
     console.log('errrrrror')
     res.send(err)
   }
+})
+
+
+// nested route 
+router.delete('/:id/attendee', async (req, res) => {
+  // try{
+    //finds the userID of the attendee
+    const findAttendee = await User.findOne({_id:req.session.userId});
+    //find event by id that relates to array
+    const findEvent = await Event.findById(req.params.id)
+    //finds index of object we will remove
+    const indexAttendee = findEvent.attendees.indexOf(findAttendee._id)
+    const indexAttendeeEventList = findAttendee.attendingEvents.indexOf(findEvent._id)
+
+    console.log(indexAttendee, 'index attendee')
+    console.log(indexAttendeeEventList, 'iael')
+    if (indexAttendee != -1) {
+    //if the person who called abort is attending the event, they will be removed from event, if they arent attending nothing
+        findEvent.attendees.splice(indexAttendee, 1)
+        findAttendee.attendingEvents.splice(indexAttendeeEventList, 1)
+    // remove attendee from event on their profile page
+    } else {
+      console.log('derpderpDERPPP')
+      // prompt('You are already attending - invite your friends!');
+    }
+    await findAttendee.save()
+    await findEvent.save()
+    res.redirect(`/events/${req.params.id}`)
+
+  // }catch(err){
+
+  // }
+
 })
 
 //backout
@@ -185,7 +218,7 @@ router.delete('/:id', async (req, res)=>{
     await Event.findByIdAndRemove(req.params.id); // delete the event from the database
     console.log("event deleted");
 
-    res.redirect('/events'); //redirect to events index page
+    res.redirect(`/users/${req.session.userId}`); //redirect to events index page
   } catch(err){
     console.log(err)
     res.send(err);

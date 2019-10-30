@@ -44,8 +44,11 @@
           </ul>
     </div>
     <a href="/events/<%=event._id%>/edit">Edit Event</a>
-    <form action="/events/<%=event._id%>" method="POST">
+    <form action="/events/<%=event._id%>/attendee" method="POST">
         <button type='Submit'>Attend!</button>
+    </form> <!-- tricking browser to knowing how to handle delete and put method -->
+    <form action="/events/<%=event._id%>/attendee?_method=DELETE" method="POST">
+        <button type='Submit'>Abort!</button>
     </form>
   </body>
 </html>
