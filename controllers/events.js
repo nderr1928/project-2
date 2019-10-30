@@ -72,65 +72,6 @@ router.put('/:id', async (req, res) => {
 //show route -> display all details for the event
 router.get('/:id', async (req, res) => {
   try{
-<<<<<<< HEAD
-
-          // will find the id of the event clicked on
-          const foundEvent = await Event.findById(req.params.id)
-            .populate({path: 'attendees'}).exec();
-          // will populate found event with all the attendees signed up
-          // foundEvent.populate({path: 'User'})
-          // .exec()
-          // render event show page
-          res.render('events/show.ejs', {
-            event: foundEvent,
-            userId: req.session.userId
-          })
-  } catch(err){
-      res.send(err);
-  }
-})
-
-// post route
-router.post('/', async (req, res)=>{
-   try {
-
-      // Why do we have to find the User and, create the event?
-      // When we create an events is it stored in the User's events array
-      // Look at the Users model
-
-        // Here we are defining are database queries
-      // we can wait for both of them to finish, instead of await
-      // each one, because the result from each one are not
-      // dependent on each other,
-      // we can wait for the concurrently by using Promise.all as seen
-      // below
-      // const findUser = User.findById(req.body.userId);
-      // const createEvent = Event.create(req.body);
-
-      // Promise All returns an array of the repsonse from DB queries,
-      // Using array destructing to save the corresponding responses
-      // as the variables foundUser, and createdevents
-      // the array destructering is the const [foundUser, createdevents]
-      // Basially what this is doing is creating varaibles for each index in the array that
-      // is returned from await Promise.all([findevents, findUser])
-      //if you are still confused look up array destructering, its fancy new javascript
-      // const [foundUser, createdEvent] = await Promise.all([findUser, createEvent]);
-
-      // Is this where you are adding the events to the User's model
-      // What is foundUser? What is it the result of? Read the code above
-      // and think through it
-      // foundUser.events.push(createdEvent);
-      const createEvent = await Event.create(req.body);
-      const foundUser = await User.findById(req.session.userId);
-      foundUser.createdEvents.push(createEvent);
-      await foundUser.save();
-      // remember when you mutate a document, something
-      // that is returned from your model, you have to
-      // save it
-      // await foundUser.save();
-      res.redirect(`/users/${req.session.userId}`);
-
-=======
     // will find the id of the event clicked on
     const foundEvent = await Event.findById(req.params.id) // find event by ID
       .populate({path: 'attendees'}) //populate the found event with the attendees array
@@ -140,17 +81,13 @@ router.post('/', async (req, res)=>{
       event: foundEvent,
       userId: req.session.userId
     });
->>>>>>> a55af1801f41da3a587f9af69607c799df6f2c89
   } catch(err){
     res.send(err);
   }
 });
 
-<<<<<<< HEAD
-
-
 router.post('/:id', async (req, res) => {
-  // try {
+  try {
     const findAttendee = await User.findOne({_id:req.session.userId});
     //find event by id that relates to array
     const findEvent = await Event.findById(req.params.id)
@@ -173,46 +110,18 @@ router.post('/:id', async (req, res) => {
     }
       await findAttendee.save()
       await findEvent.save()
-=======
-// Post route to get the attend button to push to the event attendees array
-router.post('/:id', async (req, res) => {
-  try {
-    const findAttendee = await User.findById({_id: req.session.userId}); // get the current users information from the session ID
-    const findEvent = await Event.findById(req.params.id); //find event by id that relates to array
-    // console logs to see what is going through
-    console.log("Found attendee:", findAttendee._id);
-    console.log("Found event:", findEvent._id);
-
-    findEvent.attendees.push(findAttendee); // push the user to the events attendee array
-    findAttendee.attendingEvents.push(findEvent); // push the event to the users attending events array
-    await findAttendee.save(); //save the attendee array
-    await findEvent.save(); //save the event array
->>>>>>> a55af1801f41da3a587f9af69607c799df6f2c89
 
     //console log to see if everything updated correctly
     console.log(findAttendee.attendingEvents);
     console.log(findEvent.attendees);
-<<<<<<< HEAD
     res.redirect(`/events/${req.params.id}`)
     // const findEvent = User.findOne({'events': req.params.id});
-  // } catch(err) {
-    // console.log('errrrrror')
-    // res.send(err)
-  // }
-
+  } catch(err) {
+    console.log('errrrrror')
+    res.send(err)
+  }
 })
 
-
-=======
-    // redirect the the event show page
-    res.redirect(`/events/${req.params.id}`);
-  } catch(err) {
-      console.log('error');
-      res.send(err);
-  }
-});
-
->>>>>>> a55af1801f41da3a587f9af69607c799df6f2c89
 //backout
 // router.post('/:id', async (req, res) => {
 //   try {
