@@ -56,7 +56,7 @@ router.get('/:id/show', async (req, res) =>{
 			// render the organizer index page with the populated variables and session ID
 			res.render('organizers/show.ejs', {
 				user: foundUser,
-				organizer: organizerUser,
+				userCreated: organizerUser,
 				userId: req.session.userId
 			});
 		} else {
