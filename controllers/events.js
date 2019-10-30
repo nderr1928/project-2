@@ -174,7 +174,7 @@ router.delete('/:id', async (req, res)=>{
     await Event.findByIdAndRemove(req.params.id); // delete the event from the database
     console.log("event deleted");
 
-    res.redirect('/events'); //redirect to events index page
+    res.redirect(`/users/${req.session.userId}`); //redirect to events index page
   } catch(err){
     console.log(err)
     res.send(err);
