@@ -8,23 +8,28 @@
 </head>
 <header>
 	<nav>
-            <a href="/users/<%=userId%>">Home</a>
-            <a href="/events">Events</a>
-            <a href="/users/<%=userId%>/show">Profile</a>
-            <a href='/auth/logout'>Logout</a>
-            <!-- Add user session id into profile href -->
+        <a href="/users/<%=userId%>">Home</a>
+        <a href="/events">Events</a>
+        <a href="/users/<%=userId%>/show">Profile</a>
+        <a href='/auth/logout'>Logout</a>
+        <a href="/users/<%=userId%>/edit">Edit your profile!</a>
     </nav>
 </header>
 <body>
-    <h1>Event edit page</h1>
-    <form action="/events/<%=event._id%>?_method=PUT" method="post">
-		Name: <input type="text" name="name" value="<%=event.name%>"><br/>
-		Location: <input type="text" name="location" value="<%=event.location%>"><br/>
-		Date: <input type="date" name="date" value="<%=event.date%>"><br/>
-		Time: <input type="time" name="time" value="<%=event.time%>"><br/>
-		Image URL: <input type="text" name="eventPic" value="<%=event.eventPic%>"><br/>
-		Description: <input type="text" name="description" value="<%=event.description%>"><br/>
-		<button type="submit">Register Event</button>
-	</form>
+    <h1>Edit Your Event Below</h1>
+    <div class='editForm'>
+        <form action="/events/<%=event._id%>?_method=PUT" method="post">
+    		Event Name: <input type="text" name="name" value="<%=event.name%>"><br/>
+    		Location: <input type="text" name="location" value="<%=event.location%>"><br/>
+    		Date: <input type="date" name="date" value="<%=event.date%>"><br/>
+    		Time: <input type="time" name="time" value="<%=event.time%>"><br/>
+    		Image URL: <input type="text" name="eventPic" value="<%=event.eventPic%>"><br/>
+    		Description: <input type="text" name="description" value="<%=event.description%>"><br/>
+    		<button type="submit">Edit Event</button>
+    	</form>
+        <form action="/events/<%=event._id%>?_method=DELETE" method="post">
+            <button type="Submit">Delete Event</button>
+        </form>
+    </div>
 </body>
 </html>
