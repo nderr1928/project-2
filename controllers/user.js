@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) =>{
 //Show route
 router.get('/:id/show', async (req, res) =>{
 	try{
-		const foundUser = User.findById(req.params.id)
+		const foundUser = await User.findById(req.params.id)
 			.populate({path: 'attendingEvents'})
 			.exec();
 		if(foundUser.isOrganizer === true){ // check if user is an organizer or not
