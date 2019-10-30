@@ -1,5 +1,11 @@
-/*Navigation Bar styling*/
+body{
+    background-color: #acdc89;
+    color: #fff;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bolder;
+}
 
+/*Navigation Bar styling*/
 .navList {
     list-style-type: none;
     margin: 0;
@@ -11,10 +17,12 @@
 .headline {
     float: none;
     position: absolute;
+    top: 20px;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: 'Pacifico', cursive;
     color: #fff;
+    font-size: 35px;
     font-weight: normal;
 }
 
@@ -40,25 +48,33 @@
     background-color: #467623;
 }
 
+/*Main Headinline*/
+.mainHeader{
+    text-align: center;
+}
+
+/*Headers for Events*/
+.eventsHeader{
+    text-align: center;
+}
 /* Event lists styles */
 .eventsList{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-content: center;
+    max-height: 900px;
 }
 
-/* Event box styles */
-.eventPreview{
-    width: 100%;
-    display: grid;
-    grid-template-areas:
-        "image eventTitle"
-        "image eventOrganizer"
-        "image eventDetails"
-        "image eventDescription";
-    grid-template-columns: 2;
-    grid-template-rows: 4;
+.eventPic {
+    max-height: 150px;
+    max-width: 200px;
+}
+
+.eventBanner {
+    border: 1px solid #000;
+    padding: 0 0 10px 0;
+    height: 200px; 
 }
 
 /* Body of the homepage */
