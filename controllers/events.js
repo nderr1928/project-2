@@ -35,6 +35,7 @@ router.post('/', async (req, res)=>{
   try {
     const createEvent = await Event.create(req.body); //create new event using the req.body from new.ejs form
     const foundUser = await User.findById(req.session.userId); //grab the user using the sessionID
+    // createEvent.eventOrganizer = foundUser._id;
     foundUser.createdEvents.push(createEvent); //push the newly created event to the organizers (current user) array
     await foundUser.save(); // save the user so the array stays updated
     res.redirect(`/users/${req.session.userId}`); // redirect to the user index page
@@ -141,25 +142,36 @@ router.delete('/:id', async (req, res)=>{
   try {
     console.log('delete:', req.params.id);
     // delete the event
+    //delete event from organizer database
     const eventOrganizer = await User.findOne({'createdEvents': req.params.id}); //find the event organizer for the event
-    console.log("event organizer:", eventOrganizer);
+    console.log("event organizer:", eventOrganizer.createdEvents);
     await eventOrganizer.createdEvents.remove(req.params.id); // delete the event from the event organizer array
     console.log("event deleted from organizer array");
     await eventOrganizer.save(); // save the updated eventOrganzier
     console.log(eventOrganizer.createdEvents);
 
+    //delete event from attenddes attending events
     const foundAttendees =  await User.find({'attendingEvents': req.params.id});
-    console.log("found attendees:", foundAttendees);
+    for(let i=0; i < foundAttendees.length; i++){
+      console.log("found attendees:", foundAttendees[i].attendingEvents);
+    }
     for(let i=0; i < foundAttendees.length; i++){
       console.log("before delete:", foundAttendees[i].attendingEvents);
-      await foundAttendees[i].attendingEvents.findOneAndRemove({id: req.params.id});
+      for(let j=0; j < foundAttendees[i].attendingEvents.length; j++){
+        // console.log(foundAttendees[i].attendingEvents[j]);
+        // console.log(foundAttendees[i].attendingEvents[j] == req.params.id);
+        if(foundAttendees[i].attendingEvents[j] == req.params.id){
+          await foundAttendees[i].attendingEvents.splice(j, 1);
+          j--;
+        }
+      }
       console.log("event deleted");
       await foundAttendees[i].save();
       console.log("after delete:",foundAttendees[i].attendingEvents);
     }
     
     console.log("event to be deleted from database")
-    const deleteEvent = Event.findByIdAndRemove(req.params.id); // delete the event from the database
+    await Event.findByIdAndRemove(req.params.id); // delete the event from the database
     console.log("event deleted");
 
     res.redirect('/events'); //redirect to events index page
