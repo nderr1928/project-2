@@ -51,12 +51,7 @@ router.put('/:id', async (req, res) => {
 //show route
 router.get('/:id', async (req, res) => {
   try{
-    $('button').on('click', () => {
-      let eventToggle = true
-      if (eventToggle = true) {
-        $('button').css('visibility', 'hidden')
-      }
-    })
+
           // will find the id of the event clicked on
           const foundEvent = await Event.findById(req.params.id)
             .populate({path: 'attendees'}).exec();
@@ -119,10 +114,10 @@ router.post('/', async (req, res)=>{
   }
 });
 
-router.post('/:id', async (req, res) => {
-  try {
-   // delete the user from the
 
+
+router.post('/:id', async (req, res) => {
+  // try {
     const findAttendee = await User.findOne({_id:req.session.userId});
     //find event by id that relates to array
     const findEvent = await Event.findById(req.params.id)
@@ -132,22 +127,32 @@ router.post('/:id', async (req, res) => {
     //   findEvent.event.findOne
     // }
     // find the user the event belongs too
-    findEvent.attendees.push(findAttendee)
-    findAttendee.attendingEvents.push(findEvent)
+    console.log(findEvent);
 
-    await findAttendee.save()
-    await findEvent.save()
+
+    //if event attendee = user attender, then do nothing,  else push
+    if (findEvent.attendees.indexOf(findAttendee._id) === -1) {
+      findEvent.attendees.push(findAttendee)
+      findAttendee.attendingEvents.push(findEvent)
+    } else {
+      console.log('derpderpDERPPP')
+      prompt('You are already attending - invite your friends!');
+    }
+      await findAttendee.save()
+      await findEvent.save()
 
     console.log(findAttendee.attendingEvents);
     console.log(findEvent.attendees);
     res.redirect(`/events/${req.params.id}`)
     // const findEvent = User.findOne({'events': req.params.id});
-  } catch(err) {
-    console.log('errrrrror')
-    res.send(err)
-  }
+  // } catch(err) {
+    // console.log('errrrrror')
+    // res.send(err)
+  // }
 
 })
+
+
 //backout
 // router.post('/:id', async (req, res) => {
 //   try {
