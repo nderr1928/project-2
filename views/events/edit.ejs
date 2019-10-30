@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/CSS/style.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,11 +9,13 @@
 </head>
 <header>
 	<nav>
-        <a href="/users/<%=userId%>">Home</a>
-        <a href="/events">Events</a>
-        <a href="/users/<%=userId%>/show">Profile</a>
-        <a href='/auth/logout'>Logout</a>
-        <a href="/users/<%=userId%>/edit">Edit your profile!</a>
+        <ul class="navList">
+            <li class="navItem"><a href="/users/<%=userId%>">Home</a></li>
+            <li class="navItem"><a href="/events">Events</a></li>
+            <li class="navItem"><a href="/users/<%=userId%>/show">Profile</a></li>
+            <li class="navItem" style="float:right"><a href='/auth/logout'>Logout</a></li>            
+            <li class="navItem" style="float:right"><a href="/users/<%=userId%>/edit">Edit your profile!</a></li>
+        </ul>
     </nav>
 </header>
 <body>
