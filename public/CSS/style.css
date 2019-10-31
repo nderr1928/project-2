@@ -77,24 +77,6 @@ body{
     height: 200px; 
 }
 
-/* Body of the homepage */
-.homepage{
-    display: grid;
-    grid-template-rows: 1fr 3fr 1fr;
-    grid-template-columns: 1fr;
-    text-align: center;
-    margin: 0;
-    background-color: teal;
-}
-
-.homepage > h1{
-    grid-row: 1;
-    grid-column: 1;
-    margin: 0;
-    height: 100%;
-    align-items: center;
-}
-
 /* Login form */
 .loginBox{
     display: flex;
