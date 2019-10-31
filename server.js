@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
 
+require('dotenv').config();
 require('./db/db.js');
 
 app.use(session({

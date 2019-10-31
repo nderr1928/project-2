@@ -7,9 +7,9 @@ const bcrypt = require('bcryptjs');
 router.post('/login', async (req, res) => {
     console.log("login attempt");
     try{
-        const foundUser = await User.findOne({email: req.body.email});
+        const foundUser = await User.findOne({email: req.body.email}); // looks in user database for the email that matches the login form email
         if(foundUser){
-            // comparee thier passwords
+            // compare the db encrypted password with the login form password
             if(bcrypt.compareSync(req.body.password, foundUser.password)){
                 // if true lets log them in
                 // start our session
@@ -39,21 +39,22 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/registration', async (req, res) => {
-    console.log("Create new user");
+    // goes to the user registration page
     res.render('newUser.ejs');
 })
 
 router.post('/registration', async (req, res) => {
     try{
-        const newUser = {};
+        const newUser = {}; // new open variable to store req.body information
         newUser.name =  req.body.name
         newUser.displayName = req.body.displayName
         newUser.profilePic = req.body.profilePic
         newUser.location = req.body.location
         newUser.email = req.body.email
         const password = req.body.password
-        const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-        newUser.password = passwordHash;
+        const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10)); //encrypt password
+        newUser.password = passwordHash; //set new user password to encrypted password
+        // check to see if user is organizer or not
         if(req.body.isOrganizer === "on"){
             newUser.isOrganizer = true;
         } else{
@@ -61,10 +62,8 @@ router.post('/registration', async (req, res) => {
         }
         // added the user to the db
         const createdUser = await User.create(newUser);
-        console.log(createdUser);
         req.session.userId = createdUser._id;
         req.session.logged = true;
-        console.log("New user created: ",req.session.userId);
         res.redirect(`/users/${createdUser._id}`)
     } catch(err){
         res.send(err);

@@ -77,9 +77,11 @@ router.get('/:id', async (req, res) => {
       .populate({path: 'attendees'}) //populate the found event with the attendees array
       .exec(); // execute populate
     // render event show page with the found event and session ID
+    const eventCreator = await User.findOne({'createdEvents': req.params.id}); //grab the user who created the event
     res.render('events/show.ejs', {
       event: foundEvent,
-      userId: req.session.userId
+      userId: req.session.userId,
+      eventCreator: eventCreator._id
     });
   } catch(err){
     res.send(err);
