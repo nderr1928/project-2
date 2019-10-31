@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
 
+require('dotenv').config();
 require('./db/db.js');
 
 app.use(session({
@@ -34,6 +34,6 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log('Server is up on port:', PORT);
+app.listen(process.env.PORT, () => {
+    console.log('Server is up on port:', process.env.PORT);
 })
