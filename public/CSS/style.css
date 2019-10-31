@@ -1,5 +1,5 @@
 body{
-    background-color: #acdc89;
+    background-color: #d5edc4;
     color: #fff;
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: bolder;
@@ -50,7 +50,9 @@ body{
 
 /*Main Headinline*/
 .mainHeader{
-    text-align: center;
+    text-align: right;
+    font-size: 30px;
+    margin: 0 15px 0 0;
 }
 
 /*Headers for Events*/
@@ -58,23 +60,68 @@ body{
     text-align: center;
 }
 /* Event lists styles */
-.eventsList{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-content: center;
-    max-height: 900px;
+
+.eventBanner {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 5% 0 5% 0;
+    background-color: rgb(116, 196, 58);
+    border: 2px solid #74C43A;
+    border-radius: 5px;
+    max-height: 350px;
+    max-width: 1200px;
+    border-radius: 50px;  
 }
 
 .eventPic {
-    max-height: 150px;
-    max-width: 200px;
+    grid-column:1;
+    grid-row:1/span2;
+    text-align: center;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    border-radius: 50px;
 }
 
-.eventBanner {
-    border: 1px solid #000;
-    padding: 0 0 10px 0;
-    height: 200px; 
+.eventTitle {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.date{
+    grid-row: 2;
+    grid-column: 3;
+    margin: 0;
+}
+
+.location{
+    grid-row: 1;
+    grid-column: 3;
+    margin: 0;
+}
+
+.time{
+     grid-row: 3;
+    grid-column: 3;
+    margin: 0;
+}
+
+/*.eventInfo {
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: space-around;
+    margin-left: 10px;
+  */  /*font-weight: bolder;*/
+/*}*/
+
+.eventDescription {
+    margin: 0 0 0 10px;
+    font-weight: bolder;
+    grid-column: 2;
+    grid-row: 2/ span 1;
 }
 
 /* Login form */
