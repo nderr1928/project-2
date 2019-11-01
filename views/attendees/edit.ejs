@@ -22,18 +22,30 @@
         </ul>
 	</nav>
 </header>
-<body>
+<body class="bodyEdit">
 	<h2>Make changes to your profile below</h2>
 	<div class='editForm'>
-		<form action="/users/<%=user._id%>?_method=PUT" method="post">
-			Name: <input type="text" name="name" value="<%=user.name%>"><br/>
-			Display Name: <input type="text" name="displayName" value="<%=user.displayName%>"><br/>
-			Profile Picture: <input type="text" name="profilePic" value="<%=user.profilePic%>"><br/>
-			Location: <input type="text" name="location" value="<%=user.location%>"><br/>
+		<div class="innerForm">
+			<form action="/users/<%=user._id%>?_method=PUT" method="post">
+			<div class = "innerFormProperties">
+				<div class= "innerLabels">
+					<h3>Name: </h3> 
+					<h3>Display Name: </h3>					
+					<h3>Profile Picture: </h3>					
+					<h3>Location: </h3>
+				</div>
+				<div class = "innerInput">
+					<input type="text" name="name" value="<%=user.name%>"><br/>
+					<input type="text" name="displayName" value="<%=user.displayName%>"><br/>
+					<input type="text" name="profilePic" value="<%=user.profilePic%>"><br/>
+					<input type="text" name="location" value="<%=user.location%>"><br/>
+				</div>
+			</div>
+		</br>
 			<button type="submit">Make Changes</button>
-		</form>
-	</div>
-	<div class = 'editFormDelete'>
+			</form>
+		</div>
+		</br>
 		<form action="/users/<%=user._id%>?_method=DELETE" method="post">
 			<button type="Submit">Delete User</button>
 		</form>

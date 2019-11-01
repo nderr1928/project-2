@@ -3,6 +3,74 @@ body{
     color: #fff;
     font-family: 'Open Sans Condensed', sans-serif;
 }
+/*Login Page Styling*/
+.loginHeadline{
+    background-color: #74C43A;
+    font-family: 'Pacifico', cursive;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0 15px 0;
+    font-size: 35px;
+}
+
+.loginBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    grid-row: 2;
+    grid-column: 1;
+    padding: 60px 0 60px 0;
+}
+
+.login{
+    display: flex;
+    background-color: #74C43A;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    width: 50%;
+    margin: 0;   
+    background-color: rgba(116, 196, 58, 0.7);
+    border: 2px solid #74C43A;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px #000;
+    padding: 5px 5px 5px 5px;
+}
+
+.login>button{
+    font-family: sans-serif;
+    transition: 0.4s;
+    background-color: #DBDAD8;
+    width: 100px;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.login>button:hover{
+    background-color: #f3f2f2;
+}
+
+.noAccount{
+    padding: 10px 0 0 0;
+    text-align: center;
+    font-size: 25px;
+}
+
+.registration>button{
+    font-family: sans-serif;
+    transition: 0.4s;
+    background-color: #DBDAD8;
+    width: 250px;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;    
+}
+
+.registration>button:hover{
+    background-color: #f3f2f2;    
+}
 
 /*Navigation Bar styling*/
 .navList {
@@ -129,26 +197,6 @@ body{
     font-size: 20px;
 }
 
-/* Login form */
-.loginBox{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    grid-row: 2;
-    grid-column: 1;
-}
-
-.login{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-content: center;
-    width: 50%;
-    margin: 0;
-    border: 2px black solid;
-    padding: 5px 5px 5px 5px;
-}
 
 .registration{
     grid-row: 3;

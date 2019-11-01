@@ -26,6 +26,21 @@ h2{
     overflow: hidden;
 }
 
+.innerFormProperties {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+/*all the children of this div*/
+.innerInput>input {
+    margin: 5px 0;
+}
+
+.innerLabels {
+    text-align: right;
+    margin-right: 5px;
+}
 
 .newUserForm {
     display: flex;
@@ -34,12 +49,22 @@ h2{
     align-content: center;
 }
 
+.bodyEdit {
+    text-align: center;
+
+}
+
 .editForm {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    /*align-content: center;*/
-    margin: 50px 0 0 0;
+    align-items: center;
+    margin: 40px 0 0 0;
+}
+
+.innerForm {
+    display: flex;
+    flex-direction: row;
 }
 
 .editFormDelete {
