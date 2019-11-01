@@ -3,6 +3,7 @@ body{
     color: #fff;
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: bolder;
+    height: 100vh;
 }
 
 /*Navigation Bar styling*/
@@ -50,83 +51,36 @@ body{
 
 /*Main Headinline*/
 .mainHeader{
-    text-align: right;
-    font-size: 30px;
-    margin: 0 15px 0 0;
-    color: #fff;
+    text-align: center;
 }
 
 /*Headers for Events*/
 .eventsHeader{
     text-align: center;
-    color: #fff;
 }
 /* Event lists styles */
-
-.eventBanner {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 40px 40px 40px;
-    margin: 5% 0 5% 0;
-    background-color: rgb(116, 196, 58);
-    border: 2px solid #74C43A;
-    border-radius: 5px;
-    width: 100%;
-    border-radius: 50px;  
+.eventsList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    max-height: 900px;
 }
 
 .eventPic {
-    grid-column:1;
-    grid-row:1/span2;
-    text-align: center;
-    height: 100%;
-    max-width: 100%;
-    margin: 0;
-    border-radius: 50px;
+    max-height: 150px;
+    max-width: 200px;
 }
 
-.eventTitle {
-    grid-column: 2;
-    grid-row: 1;
-    justify-content: space-around;
-    text-align: center;
-}
-
-.date{
-    grid-row: 2;
-    grid-column: 3;
-    margin: 0;
-}
-
-.location{
-    grid-row: 1;
-    grid-column: 3;
-    margin: 0;
-}
-
-.time{
-     grid-row: 3;
-    grid-column: 3;
-    margin: 0;
-}
-
-/*.eventInfo {
-    grid-column: 2;
-    grid-row: 2;
-    justify-content: space-around;
-    margin-left: 10px;
-  */  /*font-weight: bolder;*/
-/*}*/
-
-.eventDescription {
-    margin: 0 40px 0 10px;
-    font-weight: bolder;
-    grid-column: 2;
-    grid-row: 2/ span 1;
-    font-size: 20px;
+.eventBanner {
+    border: 1px solid #000;
+    padding: 0 0 10px 0;
+    height: 200px; 
 }
 
 /* Login form */
+
+
 .loginBox{
     display: flex;
     flex-direction: row;
@@ -153,4 +107,88 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+/* Event show page */
+.eventShowPage{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: .1fr 1fr 1fr;
+}
+
+.eventShowPage > h1{
+    grid-column: 1/ span 4;
+    grid-row: 1;
+    text-align: center;
+}
+
+.eventShowPage > img{
+    grid-column: 1/ span 2;
+    grid-row: 2;
+    margin: 5px auto 5px auto;
+    height: 300px;
+    border-radius: 10%;
+}
+
+.showEventInfo{
+    grid-column: 3;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.showEventInfo > h4{
+    font-size: 20px;
+}
+
+.eventShowDescription{
+    grid-column: 4;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.eventShowDescription > h6{
+    font-size: 20px;
+}
+
+.attendeesList{
+    border-top: 2px white solid;
+    border-right: 2px white solid;
+    grid-row: 3;
+    grid-column: 1/ span 2;
+    overflow: scroll;
+    max-height: 300px;
+}
+
+.attendeesList > ul > li > a{
+    font-size: 30px;
+}
+
+.buttonSection{
+    border-top: 2px white solid;
+    grid-row: 3;
+    grid-column: 3 / span 4;
+    width: 100%;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.buttonSection > form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+.buttonSection > form > button{
+    width: 50%;
 }

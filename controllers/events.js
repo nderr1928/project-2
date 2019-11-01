@@ -81,7 +81,8 @@ router.get('/:id', async (req, res) => {
     res.render('events/show.ejs', {
       event: foundEvent,
       userId: req.session.userId,
-      eventCreator: eventCreator._id
+      eventCreator: eventCreator._id,
+      creatorName: eventCreator.name
     });
   } catch(err){
     res.send(err);
