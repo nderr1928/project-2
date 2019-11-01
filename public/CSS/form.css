@@ -20,7 +20,7 @@ h2{
 
 .newUserPageTitle {
     background-color: #74C43A;
-        list-style-type: none;
+    list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -32,14 +32,40 @@ h2{
     justify-content: center;
 }
 
+
 /*all the children of this div*/
 .innerInput>input {
     margin: 5px 0;
+
+}
+
+.innerInputEvents {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-self: left;
+    height: 334px;
+
 }
 
 .innerLabels {
     text-align: right;
     margin-right: 5px;
+}
+
+.innerLabelsEvents {
+    text-align: right;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0px 5px;
+    height: 334px;
+}
+
+.innerLabelsEvents>h3 {
+    margin:0;
+    height:30px;
 }
 
 .newUserForm {
@@ -53,6 +79,12 @@ h2{
     text-align: center;
 
 }
+
+.bodyEditNewEvent {
+    text-align: left;
+
+}
+
 
 .editForm {
     display: flex;
