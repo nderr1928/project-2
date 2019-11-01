@@ -22,37 +22,46 @@
         </ul>
     </nav>
 </header>        
-<body>
-    <div class="eventList">              
-        <h1><%=event.name%></h1>
-        <img class='eventPic' src="<%=event.eventPic%>"><br/>
-        Event Description: <%=event.description%><br/>
-        Event Location: <%=event.location%><br/>
-        Event Date: <%=event.date%><br/>
-        Event Time: <%=event.time%><br/>
-    </div> 
-    <div class="attendeesList">
-      <h2>Attendees</h2>
-          <ul>
-              <% for(let i = 0; i < event.attendees.length; i++){ %>
-                  <li>
-                      <a href="/users/<%=event.attendees[i]._id%>/show">
-                          <%=event.attendees[i].displayName%>
-                      </a>
-                  </li>
-              <%}%>
-          </ul>
-    </div>
-    <% if(userId.toString() === eventCreator.toString()){ %>
-        <a href="/events/<%=event._id%>/edit">Edit Event</a>
-    <% } %>
-    <% if(userId.toString() !== eventCreator.toString()){ %>
-        <form action="/events/<%=event._id%>/attendee" method="POST">
-            <button type='Submit'>Attend!</button>
-        </form> <!-- tricking browser to knowing how to handle delete and put method -->
-        <form action="/events/<%=event._id%>/attendee?_method=DELETE" method="POST">
-            <button type='Submit'>Abort!</button>
-        </form>
-    <% } %>
+<body>     
+    <div class="eventShowPage">  
+        <img src="<%=event.eventPic%>">
+        <div class="showEventInfo">
+            <h1><%=event.name%></h1>
+            <h4>Event Organizer: <a href="/users/<%=eventCreator%>/show"><%=creatorName%></a></h4>
+            <h4>Event Location: <%=event.location%></h4>
+            <h4>Event Date: <%=event.date%></h4>
+            <h4>Event Time: <%=event.time%></h4>
+            <div class="eventShowDescription">
+                <h6>Event description: <%=event.description%></h6>
+            </div>
+        </div>
+        <h2>Attendees</h2>
+        <div class="buttonSection">
+            <% if(userId.toString() === eventCreator.toString()){ %>
+                <form action="/events/<%=event._id%>/edit" method="get">
+                    <button type="submit">Edit Event</button>
+                </form>
+            <% } %>
+            <% if(userId.toString() !== eventCreator.toString()){ %>
+                <form action="/events/<%=event._id%>/attendee" method="POST">
+                    <button type='Submit'>Attend!</button>
+                </form> <!-- tricking browser to knowing how to handle delete and put method -->
+                <form action="/events/<%=event._id%>/attendee?_method=DELETE" method="POST">
+                    <button type='Submit'>Abort!</button>
+                </form>
+            <% } %>
+        </div>
+        <div class="attendeesList">
+            <ul>
+                <% for(let i = 0; i < event.attendees.length; i++){ %>
+                    <li>
+                        <a href="/users/<%=event.attendees[i]._id%>/show">
+                            <%=event.attendees[i].displayName%>
+                        </a>
+                    </li>
+                <%}%>
+            </ul>
+        </div>
+    </div>     
   </body>
 </html>
