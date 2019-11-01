@@ -23,33 +23,51 @@
     </nav>
 </header> 
 <body>
-    <h1>Welcome <%=user.displayName%>!</h1>
-    <h2>Your Upcoming Events</h2>
-    <div class="eventsList">
-        <ul>
+    <h1 class="mainHeader">Welcome <%=user.displayName%>!</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="eventsHeader">Your Upcoming Events</h2>
+            </div>
+        </div>                
+        <div class="eventsList">
             <% for(let i = 0; i < organizer.createdEvents.length; i++){ %>
-                <li>
+                <div class="eventBanner">
+                    <img class="eventPic" src="<%=organizer.createdEvents[i].eventPic%>">
                     <a href="/events/<%=organizer.createdEvents[i]._id%>">
-                        <%=organizer.createdEvents[i].name%>    
+                        <h3 class="eventTitle"><%=organizer.createdEvents[i].name%></h3>    
                     </a>
-                </li>
+                    <h4 class="location">Location: <%=organizer.createdEvents[i].location%></h4>
+                    <h4 class="date">Date: <%=organizer.createdEvents[i].date%></h4>
+                    <h4 class="time">Time: <%=organizer.createdEvents[i].time%></h4>
+                    <p class="eventDescription">
+                        <%=organizer.createdEvents[i].description%>
+                    </p>
+                </div>
             <%}%>
-        </ul>
-    </div>
-    <form action="/events/new" method="get">
-        <button type="submit">Create new event</button>
-    </form>
-    <h2>Upcoming Events You're Attending</h2>
-    <div class="eventsList">
-        <ul>
-            <% for(let i = 0; i < user.attendingEvents.length; i++){ %>
-                <li>
-                    <a href="/events/<%=user.attendingEvents[i]._id%>">
-                        <%=user.attendingEvents[i].name%>   
-                     </a>
-                </li>
-            <%}%>
-        </ul>
+        </div>
+        <form action="/events/new" method="get">
+            <button type="submit">Create new event</button>
+        </form>
+        <div class="row">   
+             <div class="col-lg-12">
+                <h2 class="eventsHeader">Upcoming Events You're Attending</h2>
+            </div>
+        </div>  
+            <div class="eventsList">
+                <% for(let i = 0; i < user.attendingEvents.length; i++){ %>
+                    <div class="eventBanner">
+                        <img class="eventPic"src="<%=user.attendingEvents[i].eventPic%>">
+                            <a href="/events/<%=user.attendingEvents[i]._id%>">
+                                <h3 class="eventTitle"><%=user.attendingEvents[i].name%></h3>
+                            </a>
+                            <h4 class="location">Location: <%=user.attendingEvents[i].location%></h4>
+                            <h4 class="date">Date: <%=user.attendingEvents[i].date%></h4>
+                            <h4 class="time">Time: <%=user.attendingEvents[i].time%></h4>
+                    <p class="eventDescription"><%=user.attendingEvents[i].description%></p>
+                    </div>
+                <%}%>
+            </div>
     </div>
 </body>
 </html>

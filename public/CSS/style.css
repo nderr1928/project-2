@@ -1,8 +1,7 @@
 body{
-    background-color: #d5edc4;
+    background-color: #cccccc;
     color: #fff;
     font-family: 'Open Sans Condensed', sans-serif;
-    font-weight: bolder;
 }
 
 /*Navigation Bar styling*/
@@ -53,34 +52,40 @@ body{
     text-align: right;
     font-size: 30px;
     margin: 0 15px 0 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
 }
 
 /*Headers for Events*/
 .eventsHeader{
     text-align: center;
+    color: #fff;
+    font-family: 'Open Sans Condensed', sans-serif;    
+    font-weight: bold;
+    text-shadow: .5px .5px .5px #000;
 }
 /* Event lists styles */
 
 .eventBanner {
     display: grid;
-    grid-template-columns: 1fr 2fr 2fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 40px 40px 40px;
     margin: 5% 0 5% 0;
-    background-color: rgb(116, 196, 58);
+    background-color: rgba(116, 196, 58, 0.7);
     border: 2px solid #74C43A;
     border-radius: 5px;
-    max-height: 350px;
-    max-width: 1200px;
-    border-radius: 50px;  
+    width: 100%;
+    border-radius: 50px;
+    box-shadow: 2px 2px 3px #000;  
 }
 
 .eventPic {
     grid-column:1;
     grid-row:1/span2;
     text-align: center;
-    max-height: 100%;
+    height: 100%;
     max-width: 100%;
-    margin: auto;
+    margin: 0;
     border-radius: 50px;
 }
 
@@ -118,10 +123,10 @@ body{
 /*}*/
 
 .eventDescription {
-    margin: 0 0 0 10px;
-    font-weight: bolder;
+    margin: 0 40px 0 10px;
     grid-column: 2;
     grid-row: 2/ span 1;
+    font-size: 20px;
 }
 
 /* Login form */
