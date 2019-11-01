@@ -23,15 +23,30 @@
     </nav>
 </header>
 <body>
-    <h1>Upcoming Events That Might Interest You</h1>
-    <div class="eventsList">
-        <%for(let i = 0; i < event.length; i++){%>
-            <p>
-                <a href="/events/<%=event[i]._id%>">
-                    <%=event[i].name%>    
-                </a>
-            </p>
-        <%}%>
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="eventsHeader">Upcoming Events That Might Interest You</h2>
+            </div>
+            <div class="eventsList">
+                <% for(let i = 0; i < event.length; i++){ %>
+                    <div class="eventBanner">
+                        <img class="eventPic"src="<%=event[i].eventPic%>">
+                        <a href="/events/<%=event[i]._id%>">
+                            <h3 class="eventTitle" >
+                                <%=event[i].name%>
+                            </h3>
+                        </a>
+                        <h4 class="location">Location: <%=event[i].location%></h4>
+                        <h4 class="date">Date: <%=event[i].date%></h4>
+                        <h4 class="time">Time: <%=event[i].time%></h4>
+                        <p class="eventDescription">
+                            <%=event[i].description%>
+                        </p>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </div> 
 </body>
 </html>
