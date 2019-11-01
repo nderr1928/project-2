@@ -29,7 +29,10 @@
             <div class="col-lg-12">
                 <h2 class="eventsHeader">Your Upcoming Events</h2>
             </div>
-        </div>                
+        </div>
+        <form action="/events/new" method="get" class="makeNewEvent">
+            <button type="submit">Create new event</button>
+        </form>                
         <div class="eventsList">
             <% for(let i = 0; i < organizer.createdEvents.length; i++){ %>
                 <div class="eventBanner">
@@ -46,9 +49,6 @@
                 </div>
             <%}%>
         </div>
-        <form action="/events/new" method="get">
-            <button type="submit">Create new event</button>
-        </form>
         <div class="row">   
              <div class="col-lg-12">
                 <h2 class="eventsHeader">Upcoming Events You're Attending</h2>

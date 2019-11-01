@@ -15,7 +15,8 @@ const userSchema = mongoose.Schema({
 	attendingEvents: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Event'
-	}]
+	}],
+	bio: String
 });
 
 const User = mongoose.model('User', userSchema);

@@ -28,7 +28,8 @@
             <div class="col-lg-12">
                 <h2 class="eventsHeader">Upcoming Events That Might Interest You</h2>
             </div>
-            <div class="eventsList">
+        </div>
+            <div class="eventList">
                 <% for(let i = 0; i < event.length; i++){ %>
                     <div class="eventBanner">
                         <img class="eventPic"src="<%=event[i].eventPic%>">
@@ -45,7 +46,6 @@
                         </p>
                     </div>
                 <%}%>
-            </div>
         </div>
     </div> 
 </body>
