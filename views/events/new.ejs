@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">	
 	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="/CSS/style.css">
+	<link rel="stylesheet" href="/CSS/form.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,18 +22,34 @@
         </ul>
 	</nav>
 </header>
-<body>
-	<h1>Create Your Next Event</h1>
-	<div class='newEventForm'>
+<body class = "bodyEditNewEvents">
+	<h2>Create Your Next Event</h2>
+	<div class='editForm'>
+		<div class="innerForm">
 		<form action="/events" method="post">
-			Event Name: <input type="text" name="name" require="true"><br/>
-			Location: <input type="text" name="location" require="true"><br/>
-			Date: <input type="date" name="date" require="true"><br/>
-			Time: <input type="time" name="time" require="true"><br/>
-			Event Pic: <input type="url" name="eventPic"><br/>
-			Description: <textarea type="text" name="description"></textarea><br/>
-			<button type="submit">Register Event</button>
+		<div class = "innerFormProperties">
+			<div class= "innerLabels">
+				<h3>Event Name: </h3> 
+				<h3>Location: </h3>	
+				<h3>Date : </h3>				
+				<h3>Time: </h3>					
+				<h3>Event Pic: </h3>
+				<h3>Description: </h3>
+			</div>
+			<div class = "innerInput">
+				<input type="text" name="name" require="true"><br/>
+				<input type="text" name="location" require="true"><br/>
+				<input type="date" name="date" require="true"><br/>
+				<input type="time" name="time" require="true"><br/>
+				<input type="url" name="eventPic"><br/>
+				<textarea type="text" name="description"></textarea><br/>
+			</div>
+		</div>
+		</br>
+		<button type="submit">Register Event</button>
 		</form>
+	</div>
 	</div>
 </body>
 </html>
+
