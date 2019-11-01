@@ -23,36 +23,26 @@
     </nav>
 </header>    
 <body>    
-    <div class='userHead'>
-        <h1><%=user.displayName%></h1>
-        <img class='profilePic' src="<%=user.profilePic%>"><br/>
-        Name: <%=user.name%><br/>
-        Location: <%=user.location%><br/>
-        Email: <%=user.location%><br/>
-    </div>
-    <h2>Check out <%=user.displayName%>'s Upcoming Events!</h2>
-    <div class='eventsList'>
-        <ul>
-            <% for(let i = 0; i < userCreated.createdEvents.length; i++){ %>
-                <li>
-                    <a href="/events/<%=userCreated.createdEvents[i]._id%>">
-                        <%=userCreated.createdEvents[i].name%>    
-                    </a>
-                </li>
-            <%}%>
-        </ul>
-    </div>
-    <h2>Attending Events</h2>
-    <div class="eventsList">
-        <ul>
-            <% for(let i = 0; i < user.attendingEvents.length; i++){ %>
-                <li>
-                    <a href="/events/<%=user.attendingEvents[i]._id%>">
-                        <%=user.attendingEvents[i].name%>   
-                    </a>
-                </li>
-            <%}%>
-        </ul>
-    </div>
+    <div class="UserShowPage">  
+        <img src="<%=user.profilePic%>">
+        <div class="showUserInfo">
+                <h1><%=user.displayName%></h1>
+                <h4>Location: <%=user.location%></h4>
+            <div class="userShowDescription">
+                <h4>Political Stances</h4>
+            </div>
+        </div>
+        <h2>Events <%=user.displayName%> has created!</h2>
+        <div class="attendeesList">
+            <ul>
+                <% for(let i = 0; i < userCreated.createdEvents.length; i++){ %>
+                    <li>
+                        <a href="/events/<%=userCreated.createdEvents[i]._id%>">
+                            <%=userCreated.createdEvents[i].name%>
+                        </a>
+                    </li>
+                <%}%>
+            </ul>
+        </div>
 </body>
 </html>

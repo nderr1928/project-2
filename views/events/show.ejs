@@ -24,29 +24,18 @@
 </header>        
 <body>     
     <div class="eventShowPage">  
-        <h1><%=event.name%></h1>
         <img src="<%=event.eventPic%>">
         <div class="showEventInfo">
-            <h4>Event Organizer: <a href="/users/<%=eventCreator%>"><%=creatorName%></a></h4>
+            <h1><%=event.name%></h1>
+            <h4>Event Organizer: <a href="/users/<%=eventCreator%>/show"><%=creatorName%></a></h4>
             <h4>Event Location: <%=event.location%></h4>
             <h4>Event Date: <%=event.date%></h4>
             <h4>Event Time: <%=event.time%></h4>
+            <div class="eventShowDescription">
+                <h6>Event description: <%=event.description%></h6>
+            </div>
         </div>
-        <div class="eventShowDescription">
-            <h6><%=event.description%></h6>
-        </div>
-        <div class="attendeesList">
-            <h2>Attendees</h2>
-            <ul>
-                <% for(let i = 0; i < event.attendees.length; i++){ %>
-                    <li>
-                        <a href="/users/<%=event.attendees[i]._id%>/show">
-                            <%=event.attendees[i].displayName%>
-                        </a>
-                    </li>
-                <%}%>
-            </ul>
-        </div>
+        <h2>Attendees</h2>
         <div class="buttonSection">
             <% if(userId.toString() === eventCreator.toString()){ %>
                 <form action="/events/<%=event._id%>/edit" method="get">
@@ -61,6 +50,17 @@
                     <button type='Submit'>Abort!</button>
                 </form>
             <% } %>
+        </div>
+        <div class="attendeesList">
+            <ul>
+                <% for(let i = 0; i < event.attendees.length; i++){ %>
+                    <li>
+                        <a href="/users/<%=event.attendees[i]._id%>/show">
+                            <%=event.attendees[i].displayName%>
+                        </a>
+                    </li>
+                <%}%>
+            </ul>
         </div>
     </div>     
   </body>
