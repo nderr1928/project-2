@@ -26,11 +26,11 @@
     <h1>Edit Your Event Below</h1>
     <div class='editForm'>
         <form action="/events/<%=event._id%>?_method=PUT" method="post">
-    		Event Name: <input type="text" name="name" value="<%=event.name%>"><br/>
-    		Location: <input type="text" name="location" value="<%=event.location%>"><br/>
-    		Date: <input type="date" name="date" value="<%=event.date%>"><br/>
-    		Time: <input type="time" name="time" value="<%=event.time%>"><br/>
-    		Image URL: <input type="text" name="eventPic" value="<%=event.eventPic%>"><br/>
+    		Event Name: <input type="text" name="name" value="<%=event.name%>" required="true"><br/>
+    		Location: <input type="text" name="location" value="<%=event.location%>" required="true"><br/>
+    		Date: <input type="date" name="date" value="<%=event.date%>" required="true"><br/>
+    		Time: <input type="time" name="time" value="<%=event.time%>" required="true"><br/>
+    		Image URL: <input type="text" name="eventPic" value="<%=event.eventPic%>" required="true"><br/>
     		Description: <input type="text" name="description" value="<%=event.description%>"><br/>
     		<button type="submit">Edit Event</button>
     	</form>

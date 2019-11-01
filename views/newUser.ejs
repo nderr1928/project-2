@@ -14,12 +14,12 @@
 	</header>
 	<div class = "newUserInputBoxes">
 		<form action="/auth/registration" class = "newUserForm" method="post">
-			<input type="text" name="name" placeholder="Your Name"><br/>
-			<input type="text" name="displayName" placeholder="Display Name"><br/>
-			<input type="text" name="profilePic" placeholder="Profile Picture URL"><br/>
-			<input type="text" name="location" placeholder="Your Location"><br/>
-			<input type="email" name="email" placeholder="Your Email"><br/>
-			<input type="password" name="password" placeholder="Your Password"><br/>
+			<input type="text" name="name" placeholder="*Your Name*" required="true"><br/>
+			<input type="text" name="displayName" placeholder="*Display Name*" required="true"><br/>
+			<input type="text" name="profilePic" placeholder="*Profile Picture URL*" required="true"><br/>
+			<input type="text" name="location" placeholder="*Your Location*" required="true"><br/>
+			<input type="email" name="email" placeholder="*Your Email*" required="true"><br/>
+			<input type="password" name="password" placeholder="*Your Password*" required="true"><br/>
 			<div><input type="checkbox" name="isOrganizer"> Event Organizer </div><br/>
 			<button type="submit">Register User</button>
 		</form>
