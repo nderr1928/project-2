@@ -72,24 +72,15 @@ body{
     background-color: #f3f2f2;    
 }
 
-.makeNewEvent{
-    text-align: center;
-    padding: 0 0 50px 0;
-}
+/*registration page
+*/
 
-.makeNewEvent>button{
-    font-family: sans-serif;
-    transition: 0.4s;
-    background-color: #74C43A;
-    color: #fff;
-    position: relative;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 20px;
-}
-
-.makeNewEvent>button:hover{
-    background-color: #467623;
+.registration{
+    grid-row: 3;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /*Navigation Bar styling*/
@@ -151,6 +142,7 @@ body{
     font-family: 'Open Sans Condensed', sans-serif;    
     font-weight: bold;
     text-shadow: .5px .5px .5px #000;
+    padding: 10px 0;
 }
 /* Event lists styles */
 
@@ -158,11 +150,11 @@ body{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 40px 40px 40px;
-    margin: 5% 0 5% 0;
+    margin: 5% auto;
     background-color: rgba(116, 196, 58, 0.7);
     border: 2px solid #74C43A;
     border-radius: 5px;
-    width: 100%;
+    width: 95%;
     border-radius: 50px;
     box-shadow: 2px 2px 3px #000;  
 }
@@ -202,29 +194,44 @@ body{
     margin: 0;
 }
 
-/*.eventInfo {
-    grid-column: 2;
-    grid-row: 2;
-    justify-content: space-around;
-    margin-left: 10px;
-  */  /*font-weight: bolder;*/
-/*}*/
 
-.eventDescription {
+.eventDescription{
     margin: 0 40px 0 10px;
     grid-column: 2;
     grid-row: 2/ span 1;
     font-size: 20px;
 }
 
-
-.registration{
-    grid-row: 3;
-    grid-column: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.eventsList{
+    max-height: 350px;
+    overflow: scroll;
+    border: 3px solid #74C43A;
+    background-color: #dbdad8;
+    padding: 15px 0;
 }
+
+/*Button to make new event organzier index
+*/
+.makeNewEvent{
+    text-align: center;
+    padding: 20px 0 20px 0;
+}
+
+.makeNewEvent>button{
+    font-family: sans-serif;
+    transition: 0.4s;
+    background-color: #74C43A;
+    color: #fff;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 20px;
+}
+
+.makeNewEvent>button:hover{
+    background-color: #467623;
+}
+
 
 /* Event show page */
 .eventShowPage{
