@@ -3,6 +3,21 @@ body{
     color: #fff;
     font-family: 'Open Sans Condensed', sans-serif;
 }
+
+.buttonCSS{
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    transition: 0.4s;
+    background-color: #74C43A;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.buttonCSS:hover{
+    background-color: #467623;
+}
+
 /*Login Page Styling*/
 .loginHeadline{
     background-color: #74C43A;
@@ -291,6 +306,7 @@ body{
     grid-column: 1/ span 4;
     overflow: scroll;
     max-height: 300px;
+    background-color: #74C43A;
 }
 
 .attendeesList > ul{
@@ -370,5 +386,6 @@ body{
     border: 1px white solid;
     height: 250px;
     overflow: scroll;
+    background-color: #74C43A;
 }
 

@@ -39,7 +39,7 @@
         <div class="buttonSection">
             <% if(userId.toString() === eventCreator.toString()){ %>
                 <form action="/events/<%=event._id%>/edit" method="get">
-                    <button type="submit">Edit Event</button>
+                    <button class="buttonCSS" type="submit">Edit Event</button>
                 </form>
             <% } %>
             <% if(userId.toString() !== eventCreator.toString()){ %>
