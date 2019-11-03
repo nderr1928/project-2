@@ -83,3 +83,7 @@ Organizer story
 Organizer goes to website and is prompted to create an account and provide basic information - email username, city.  Then, they have the ability to go to their home page where they can see three primary sections.  They can see their own events that they have organized.  They can see those that are following them.  They can search other organizers and see their events.
 When they choose to create a new event, they are taken to a page where they can set up the location, name of event, city, and description.  They can navigate to view an event whether or not it’s theirs.
 
+
+![Wire frame 1](./public/Images/wireframe1.jpg)
+![Wire frame 2](./public/Images/wireframe2.jpg)
+![Wire frame 3](./public/Images/wireframe3.jpg)
