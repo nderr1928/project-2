@@ -5,6 +5,20 @@ body{
     font-weight: bolder;
 }
 
+.buttonCSS{
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    transition: 0.4s;
+    background-color: #74C43A;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.buttonCSS:hover{
+    background-color: #467623;
+}
+
 /*newUser Styling*/
 .newUserInputBoxes {
     display: flex;
