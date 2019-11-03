@@ -98,16 +98,13 @@ router.get('/:id/edit', async (req, res) =>{
 });
 
 //Put route for edit
-router.put('/:id', async (req, res) =>{
+router.put('/:id/show', async (req, res) =>{
 	try{
+		console.log(req.params.id);
 		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
-		if(foundUser.isOrganizer === true){
-			//if the updated user is an organizer, the user will be redirected to the organizer index page
-			res.redirect('organizers/index.ejs');
-		} else {
-			//if the updated user is an attendees, the user will be redirected to the attendee index page
-			res.redirect('attendees/index.ejs');
-		}
+		console.log(updatedUser);
+		//if the updated user is an organizer, the user will be redirected to the organizer index page
+		res.redirect(`/users/${req.params.id}/show`);
 	} catch(err){
 		res.send(err);
 	}
@@ -116,32 +113,46 @@ router.put('/:id', async (req, res) =>{
 // Delete user route
 router.delete('/:id', async (req, res) =>{
 	try{
+		console.log('delete route for user');
 		const foundUser = await User.findById(req.params.id);
+		console.log(foundUser);
 		if(foundUser.isOrganizer === true){
+			console.log("organizer");
 			const userCreatedEvents =  await foundUser.createdEvents;
+			console.log(userCreatedEvents);
 			// find all the created events attendees, go into their attending arrays and remove the event from them
 			for(let i = 0; i < userCreatedEvents.length; i++){
+				console.log("loop 1, itteration:", i);
 				let foundEvent = await Event.findById(userCreatedEvents[i]); // redefine cuurent event into a variable
+				console.log(foundEvent);
 				let eventAttendees = await foundEvent.attendees; // take the attendees array and store it in a new variable
+				console.log(eventAttendees);
 				//itterate through the event attendees to get each user ID within
 				for(let j = 0; j < eventAttendees.length; j++){
+					console.log("loop 2, itteration:", j);
 					let foundEventUser = await User.findById(eventAttendees[j]); // define the found user using the eventAttendee index
+					console.log(foundEventUser);
 					//itterate through current users array to find an id that matches the events id
 					for(let k = 0; k < foundEventUser.attendingEvents.length; k++){ 
+						console.log("loop 3, itteration:", k);
+						console.log(foundEventUser.attendingEvents[k].toString() == foundEvent._id.toString());
 						if(foundEventUser.attendingEvents[k].toString() == foundEvent._id.toString()){
-							await founderUser.attendingEvents.splice(k, 1);
+							await foundEventUser.attendingEvents.splice(k, 1);
 							k--;
+							console.log("event removed on:", foundEventUser);
 						}
 					}
 					await foundEventUser.save(); // save the found user after removing the event from their attending
+					console.log(foundEventUser);
 				}
 				await Event.findByIdAndRemove(foundEvent); // delete the cuurent event in iteration from the database
 			}
+			console.log("user deleted");
 			await foundUser.remove();// delete the found user from the database
 			// reroute to the main index page
 			res.redirect('/'); // redirect to the home page
 		} else{
-			const userEventsAttending = foundUser.attendingEvents; // create an array with all the users event id's of what they wanted to attend
+			const userEventsAttending = await foundUser.attendingEvents; // create an array with all the users event id's of what they wanted to attend
 			// iterate through each event id from the userEventsAttending array
 			for(let i = 0; i < userEventsAttending.length; i++){
 				let foundEvent = await Event.findById(userEventsAttending[i]); // reassigns current userEvent to a found event 
